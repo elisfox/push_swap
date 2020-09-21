@@ -51,9 +51,9 @@ int *create_array(int count, char ***args)
         while(args[i][j])
         {
             tab[count] = (int)(ft_atoi(args[i][j]));
-            //printf("%d\n", tab[count]);
-            count++;
+            printf("tab = %d\n", tab[count]);
             j++;
+            count++;
         }
         i++;
     }
@@ -70,7 +70,7 @@ char ***extract_numbers(int ac, char **av)
     j = 0;
     args = (char ***)malloc(sizeof(char **) * (ac));
     while (i < ac)
-        args[j++] = ft_strsplit(av[i++], ' ');  
+        args[j++] = ft_strsplit(av[i++], ' '); 
     args[j] = NULL;
     return (args);
 }
@@ -101,7 +101,7 @@ void check_doubles(int *tab)
     
     i = 0;
     j = 0;
-    while(tab[i])
+    while(tab[i++])
     {
         j = 0;
         while(tab[j++])
@@ -172,7 +172,7 @@ t_stack *init_stack_a(t_massive *s, char **av, int ac)
         error_stack();
     head = s->a;
     s->a->val = s->tab[i++];
-    while(s->tab[i])
+    while(i < s->size)
         s->a = add_elem(s->a, s->tab[i++]);
     s->a->next = NULL;
     new_tab = sort_tab(s->tab, s->size);
@@ -203,7 +203,6 @@ int main(int ac, char **av)
         //s->b = init_stack_b(s);
         if(!(s->b = (t_stack *)ft_memalloc(sizeof(t_stack))))
             error_stack();
-            
         print_stack(s->a);
     }
     return(0);
