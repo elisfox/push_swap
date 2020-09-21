@@ -47,7 +47,7 @@ typedef struct s_instruction
     int     rra;
     int     rrb;
     int     rrr;
-}              t_instrucrion;
+}              t_instruction;
 
 int *sort_tab(int *arr, int size);
 
