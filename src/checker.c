@@ -204,7 +204,11 @@ int main(int ac, char **av)
         if(!(s->b = (t_stack *)ft_memalloc(sizeof(t_stack))))
             error_stack();
         print_stack(s->a);
-        read_instructions(s);
+        //read_instructions(s);
+        rotate_a_b(s->a, s);
+        printf("\n");
+        print_stack(s->a);
+
     }
     return(0);
 }

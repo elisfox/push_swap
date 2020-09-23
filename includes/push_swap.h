@@ -34,7 +34,7 @@ typedef struct		s_massive
 	t_stack			*b;
 }					t_massive;
 
-typedef struct s_instruction
+typedef struct s_instr
 {
     int     sa;
     int     sb;
@@ -47,9 +47,10 @@ typedef struct s_instruction
     int     rra;
     int     rrb;
     int     rrr;
-}              t_instruction;
+}              t_instr;
 
 int *sort_tab(int *arr, int size);
-
+void rotate_a_b(t_stack *stack, t_massive *s);
+void swap_a_b(t_stack *stack);
 
 #endif
