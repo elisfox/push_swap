@@ -50,7 +50,8 @@ typedef struct s_instr
 }              t_instr;
 
 int *sort_tab(int *arr, int size);
-void rotate_a_b(t_stack *stack, t_massive *s);
-void swap_a_b(t_stack *stack);
+t_stack *rotate_a_b(t_stack *stack);
+t_stack *swap_a_b(t_stack *stack);
+t_stack *rr_a_b(t_stack *stack);
 
 #endif

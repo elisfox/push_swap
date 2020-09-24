@@ -160,7 +160,7 @@ void get_index(t_stack *a, int *new_tab)
     }
 }
 
-t_stack *init_stack_a(t_massive *s, char **av, int ac)
+void init_stack_a(t_massive *s, char **av, int ac)
 {
     t_stack *head;
     int i;
@@ -178,7 +178,6 @@ t_stack *init_stack_a(t_massive *s, char **av, int ac)
     new_tab = sort_tab(s->tab, s->size);
     s->a = head;
     get_index(s->a, new_tab);
-    return(head);
 }
 
 /*t_stack *init_stack_a(t_massive *s)
@@ -199,13 +198,13 @@ int main(int ac, char **av)
 		error_stack();
 	if (ac >= 2)
     {
-        s->a = init_stack_a(s, av, ac);
+        init_stack_a(s, av, ac);
         //s->b = init_stack_b(s);
         if(!(s->b = (t_stack *)ft_memalloc(sizeof(t_stack))))
             error_stack();
         print_stack(s->a);
         //read_instructions(s);
-        rotate_a_b(s->a, s);
+        s->a = rr_a_b(s->a);
         printf("\n");
         print_stack(s->a);
 
