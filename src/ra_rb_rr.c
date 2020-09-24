@@ -16,15 +16,15 @@ t_stack *rotate_a_b(t_stack *stack)
 
 t_stack *rr_a_b(t_stack *stack)
 {
-    t_stack *last;
+    t_stack *prelast;
     t_stack *head;
     t_stack *first;
 
     head = stack;
-    while (stack->next != NULL)
+    while (stack->next->next != NULL)
         stack = stack->next;
-    last = stack; 
-    first = last;
-    first->next = head;
+    prelast = stack; 
+    first = prelast->next;
+    prelast = NULL;
     return (first);
 }
