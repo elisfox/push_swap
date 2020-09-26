@@ -5,6 +5,8 @@ t_stack *rotate_a_b(t_stack *stack)
     t_stack *first;
     t_stack *head;
 
+    if (!stack->next)
+        return (stack);
     first = stack;
     head = stack->next;
     while (stack->next != NULL)
@@ -14,17 +16,35 @@ t_stack *rotate_a_b(t_stack *stack)
     return(head);
 }
 
+void rr(t_stack *stack_a, t_stack *stack_b)
+{
+    rotate_a_b(stack_a);
+    rotate_a_b(stack_b);
+}
+
 t_stack *rr_a_b(t_stack *stack)
 {
-    t_stack *prelast;
-    t_stack *head;
+    t_stack *last;
     t_stack *first;
+    t_stack *prev;
 
-    head = stack;
-    while (stack->next->next != NULL)
+    first = stack;
+    prev = first;
+    if (!stack->next)
+        return (stack);
+    while (stack->next != NULL)
+    {
+        prev = stack;
         stack = stack->next;
-    prelast = stack; 
-    first = prelast->next;
-    prelast = NULL;
-    return (first);
+    }
+    last = stack;
+    last->next = first;
+    prev->next = NULL;
+    return (last);
+}
+
+void rrr(t_stack *stack_a, t_stack *stack_b)
+{
+    rr_a_b(stack_a);
+    rr_a_b(stack_b);
 }

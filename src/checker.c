@@ -172,6 +172,7 @@ void init_stack_a(t_massive *s, char **av, int ac)
         error_stack();
     head = s->a;
     s->a->val = s->tab[i++];
+    s->a->size = s->size;
     while(i < s->size)
         s->a = add_elem(s->a, s->tab[i++]);
     s->a->next = NULL;
@@ -204,9 +205,11 @@ int main(int ac, char **av)
             error_stack();
         print_stack(s->a);
         //read_instructions(s);
-        s->a = rr_a_b(s->a);
+        s->a = pop(s->a);
         printf("\n");
         print_stack(s->a);
+        printf("\n");
+        print_stack(s->b);
 
     }
     return(0);
