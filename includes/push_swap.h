@@ -54,6 +54,7 @@ int *sort_tab(int *arr, int size);
 t_stack *rotate_a_b(t_stack *stack);
 void swap_a_b(t_stack *stack);
 t_stack *rr_a_b(t_stack *stack);
-t_stack *pop(t_stack *stack);
-void push(t_stack *from, t_stack *to);
+void push_a(t_massive *s);
+void push_b(t_massive *s);
+void print_stack(t_stack *a);
 #endif

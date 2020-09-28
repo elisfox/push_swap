@@ -181,7 +181,7 @@ void init_stack_a(t_massive *s, char **av, int ac)
     get_index(s->a, new_tab);
 }
 
-/*t_stack *init_stack_a(t_massive *s)
+t_stack *init_stack_b(t_massive *s)
 {
     if(!(s->b = (t_stack *)ft_memalloc(sizeof(t_stack))))
         error_stack();
@@ -189,7 +189,7 @@ void init_stack_a(t_massive *s, char **av, int ac)
     s->b->val = 0;
     s->b->next = NULL;
     return(s->b);    
-}*/
+}
 
 int main(int ac, char **av)
 {
@@ -200,16 +200,25 @@ int main(int ac, char **av)
 	if (ac >= 2)
     {
         init_stack_a(s, av, ac);
-        //s->b = init_stack_b(s);
-        if(!(s->b = (t_stack *)ft_memalloc(sizeof(t_stack))))
-            error_stack();
+        s->b = init_stack_b(s);
+        //if(!(s->b = (t_stack *)ft_memalloc(sizeof(t_stack))))
+          //  error_stack();
+        printf("s->a\n");
         print_stack(s->a);
+        printf("\ns->b\n");
+        print_stack(s->b);
         //read_instructions(s);
-        s->a = pop(s->a);
+        push_b(s);
+        push_a(s);
+        push_a(s);
         printf("\n");
         print_stack(s->a);
         printf("\n");
         print_stack(s->b);
+
+        /* printf("\n");
+        s->a = rotate_a_b(s->a);
+        print_stack(s->a);*/
 
     }
     return(0);

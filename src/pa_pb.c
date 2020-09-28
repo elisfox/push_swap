@@ -1,34 +1,43 @@
 #include "../includes/push_swap.h"
 
-t_stack *pop(t_stack *stack)
+void push_b(t_massive *s)
 {
     t_stack *tmp;
-
-    tmp = NULL;
-    if (stack)
+    
+    if (s->a == NULL)
+        return;
+    tmp = s->a;
+    s->a = s->a->next;
+    if (s->b->index == 0)
     {
-        tmp = stack;
-        if (stack->next == NULL)
-            stack = NULL;
-        else
-            stack = tmp->next;
-        tmp->next = NULL;   
-    }
-    return(tmp);
-}
-
-void push(t_stack *from, t_stack *to)
-{
-    t_stack *tmp;
-
-    tmp = pop(from);
-    if (to)
-    {
-        tmp->next = to;
-        to = tmp;
+        s->b = NULL;
+        tmp->next = s->b;
+        s->b = tmp;
     }
     else
+    {    
+        tmp->next = s->b;
+        s->b = tmp;
+    }
+}
+
+void push_a(t_massive *s)
+{
+    t_stack *tmp;
+
+    if (s->b == NULL)
+        return;
+    tmp = s->b;
+    s->b = s->b->next;
+    if (s->a->index == 0)
     {
-        to = tmp;
-    }   
+        s->a = NULL;
+        tmp->next = s->a;
+        s->a = tmp;
+    }
+    else
+    {    
+        tmp->next = s->a;
+        s->a = tmp;
+    }
 }
