@@ -50,11 +50,16 @@ typedef struct s_instr
     int     rrr;
 }              t_instr;
 
+void error_stack(void);
 int *sort_tab(int *arr, int size);
 t_stack *rotate_a_b(t_stack *stack);
 void swap_a_b(t_stack *stack);
+void swap_ss(t_stack *stack_a, t_stack *stack_b);
 t_stack *rr_a_b(t_stack *stack);
+void rr(t_stack *stack_a, t_stack *stack_b);
+void rrr(t_stack *stack_a, t_stack *stack_b);
 void push_a(t_massive *s);
 void push_b(t_massive *s);
 void print_stack(t_stack *a);
+void    read_instructions(t_massive *s);
 #endif

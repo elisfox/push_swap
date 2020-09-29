@@ -3,89 +3,72 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcolossu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jojoseph <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/16 19:07:56 by bcolossu          #+#    #+#             */
-/*   Updated: 2019/10/16 19:08:00 by bcolossu         ###   ########.fr       */
+/*   Created: 2019/09/26 19:34:54 by jojoseph          #+#    #+#             */
+/*   Updated: 2019/10/09 21:53:56 by jojoseph         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ch_segment(char *segment, char **line)
+static int	add_line(char **s, char **line)
 {
-	char	*pointer;
-
-	pointer = NULL;
-	if (segment)
-		if ((pointer = ft_strchr(segment, '\n')))
-		{
-			*pointer = '\0';
-			*line = ft_strdup(segment);
-			ft_strcpy(segment, ++pointer);
-		}
-		else
-		{
-			*line = ft_strdup(segment);
-			ft_strclr(segment);
-		}
-	else
-		*line = ft_strnew(1);
-	return (pointer);
-}
-
-int		join_line(const int fd, char **line, char **segment)
-{
-	char	buf[BUFF_SIZE + 1];
-	char	*pointer;
-	int		was_read;
+	int		len;
 	char	*tmp;
 
-	if (!line || fd < 0 || read(fd, buf, 0) < 0)
+	len = 0;
+	while ((*s)[len] != '\n' && (*s)[len] != '\0')
+		len++;
+	if ((*s)[len] == '\n')
+	{
+		*line = ft_strsub(*s, 0, len);
+		tmp = ft_strdup(&((*s)[len + 1]));
+		free(*s);
+		*s = tmp;
+		if ((*s)[0] == '\0')
+			ft_strdel(s);
+	}
+	else
+	{
+		*line = ft_strdup(*s);
+		ft_strdel(s);
+	}
+	return (1);
+}
+
+static int	result(char **s, char **line, int ret, int fd)
+{
+	if (ret < 0)
 		return (-1);
-	pointer = ch_segment(*segment, line);
-	while (!pointer && (was_read = read(fd, buf, BUFF_SIZE)))
+	else if (ret == 0 && s[fd] == NULL)
+		return (0);
+	else
+		return (add_line(&s[fd], line));
+}
+
+int			get_next_line(const int fd, char **line)
+{
+	int			ret;
+	static char	*s[FD_SIZE];
+	char		buf[BUFF_SIZE + 1];
+	char		*tmp;
+
+	if (fd < 0 || line == NULL)
+		return (-1);
+	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
 	{
-		buf[was_read] = '\0';
-		if ((pointer = ft_strchr(buf, '\n')))
-		{
-			*pointer = '\0';
-			*segment = ft_strdup(++pointer);
-		}
+		buf[ret] = '\0';
+		if (s[fd] == NULL)
+			s[fd] = ft_strdup(buf);
 		else
-			*segment = "\0";
-		tmp = *line;
-		*line = ft_strjoin(*line, buf);
-		ft_strdel(&tmp);
+		{
+			tmp = ft_strjoin(s[fd], buf);
+			free(s[fd]);
+			s[fd] = tmp;
+		}
+		if (ft_strchr(s[fd], '\n'))
+			break ;
 	}
-	return (was_read || ft_strlen(*segment) || (ft_strlen(*line))) ? 1 : 0;
-}
-
-t_gnl	*add_list(const int fd)
-{
-	t_gnl	*add;
-
-	if (!(add = (t_gnl *)malloc(sizeof(t_gnl))))
-		return (NULL);
-	add->fd = fd;
-	add->segment = NULL;
-	add->next = NULL;
-	return (add);
-}
-
-int		get_next_line(const int fd, char **line)
-{
-	static t_gnl	*first;
-	t_gnl			*tmp;
-
-	if (first == NULL)
-		first = add_list(fd);
-	tmp = first;
-	while (tmp->fd != fd)
-	{
-		if (!tmp->next)
-			tmp->next = add_list(fd);
-		tmp = tmp->next;
-	}
-	return (join_line(tmp->fd, line, &tmp->segment));
+	return (result(s, line, ret, fd));
 }

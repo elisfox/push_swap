@@ -103,6 +103,7 @@ void check_doubles(int *tab)
     j = 0;
     while(tab[i++])
     {
+        printf("!!!");
         j = 0;
         while(tab[j++])
         {
@@ -116,7 +117,7 @@ void check_doubles(int *tab)
 void valid_args(t_massive *s, int ac, char **av)
 {
     char ***args;
-
+    
     check_numbers(ac, av);
     args = extract_numbers(ac, av);
     s->size = count_numbers(args);
@@ -203,18 +204,18 @@ int main(int ac, char **av)
         s->b = init_stack_b(s);
         //if(!(s->b = (t_stack *)ft_memalloc(sizeof(t_stack))))
           //  error_stack();
-        printf("s->a\n");
+        /*printf("s->a\n");
         print_stack(s->a);
         printf("\ns->b\n");
-        print_stack(s->b);
-        //read_instructions(s);
-        push_b(s);
+        print_stack(s->b);*/
+        read_instructions(s);
+        /*push_b(s);
         push_a(s);
         push_a(s);
         printf("\n");
         print_stack(s->a);
         printf("\n");
-        print_stack(s->b);
+        print_stack(s->b);*/
 
         /* printf("\n");
         s->a = rotate_a_b(s->a);
