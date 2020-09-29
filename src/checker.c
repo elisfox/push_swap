@@ -6,6 +6,27 @@ void error_stack(void)
     exit(1);
 }
 
+void check_doubles(t_massive *s)
+{
+    int *tab;
+    int i;
+    int j;
+    
+    i = 0;
+    j = 0;
+    tab = s->tab;
+    while(i < s->size)
+    {
+        j = i + 1;
+        while(j < s->size)
+        {
+            if(tab[i] == tab[j] && i != j)
+                error_stack();
+        }
+        i++;
+    }
+}
+
 void check_numbers(int ac, char **av)
 {
     int i;
@@ -45,7 +66,7 @@ int *create_array(int count, char ***args)
     if(!(tab = (int *)malloc(sizeof(int) * count)))
         return (NULL);
     count = 0;
-    while(args[i])
+    while(args[i] != NULL)
     {
         j = 0;
         while(args[i][j])
@@ -57,6 +78,7 @@ int *create_array(int count, char ***args)
         }
         i++;
     }
+    printf("!!!");
     return (tab);            
 }
 
@@ -94,26 +116,6 @@ int count_numbers(char ***args)
     return (count);
 }
 
-void check_doubles(int *tab)
-{
-    int i;
-    int j;
-    
-    i = 0;
-    j = 0;
-    while(tab[i++])
-    {
-        printf("!!!");
-        j = 0;
-        while(tab[j++])
-        {
-            if(tab[i] == tab[j] && i != j)
-                error_stack();
-        }
-        i++;
-    }
-}
-
 void valid_args(t_massive *s, int ac, char **av)
 {
     char ***args;
@@ -122,8 +124,7 @@ void valid_args(t_massive *s, int ac, char **av)
     args = extract_numbers(ac, av);
     s->size = count_numbers(args);
     s->tab = create_array(s->size, args);
-    check_doubles(s->tab);
-    
+    check_doubles(s);    
 }
 
 t_stack *add_elem(t_stack *first, int i)
