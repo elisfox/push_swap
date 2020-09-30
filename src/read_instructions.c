@@ -80,6 +80,7 @@ void check_sort_stacks(t_massive *s)
 	flag_b = 1;
 	while (s->a->next)
 	{
+		printf("s->a->val = %d\n", s->a->val);
 		if	(s->a->val > s->a->next->val)
 			flag_a = 0;
 		s->a = s->a->next;
