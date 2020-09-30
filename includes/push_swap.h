@@ -34,8 +34,11 @@ typedef struct		s_massive
 	t_stack			*b;
 }					t_massive;
 
+typedef enum e_command {SA, SB, RR} command;
+
 typedef struct s_instr
 {
+    command comm;
     int     sa;
     int     sb;
     int     ss;

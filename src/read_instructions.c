@@ -1,8 +1,9 @@
 #include "../includes/push_swap.h"
 
+
 void	make_instr(t_massive *s, t_instr *instr)
 {
-	if (instr->sa)
+	if (instr->comm == SA)
 		swap_a_b(s->a);
 	else if (instr->sb)
 		swap_a_b(s->b);
@@ -26,10 +27,11 @@ void	make_instr(t_massive *s, t_instr *instr)
 		rrr(s->a, s->b);	
 }
 
+
 static int check_instr(char *line, t_instr *instr)
 {
     if(!ft_strcmp(line, "sa"))
-		instr->sa = 1;
+		instr->comm = SA;
 	else if(!ft_strcmp(line, "sb"))
 		instr->sb = 1;
 	else if(!ft_strcmp(line, "ss"))
@@ -119,6 +121,5 @@ void    read_instructions(t_massive *s)
         }
 		free(line);
     }
-    close(fd);
 	check_sort_stacks(s);
 }
