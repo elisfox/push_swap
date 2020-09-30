@@ -5,7 +5,7 @@ t_stack *rotate_a_b(t_stack *stack)
     t_stack *first;
     t_stack *head;
 
-    if (!stack->next)
+    if (!stack || !stack->next)
         return (stack);
     first = stack;
     head = stack->next;
@@ -30,6 +30,8 @@ t_stack *rr_a_b(t_stack *stack)
 
     first = stack;
     prev = first;
+    if (!stack)
+        return (stack);
     if (!stack->next)
         return (stack);
     while (stack->next != NULL)

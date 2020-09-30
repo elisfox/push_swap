@@ -81,15 +81,17 @@ void check_sort_stacks(t_massive *s)
 	while (s->a->next)
 	{
 		if	(s->a->val > s->a->next->val)
-			flag_a *= 0;
+			flag_a = 0;
 		s->a = s->a->next;
 	}
+	printf("flag_a = %d\n", flag_a);
 	if (s->b)
 		flag_b = 0;
-	if (flag_a == 1 && flag_b == 1)
-		ft_printf("OK\n");
-	else
+	printf("flag_b = %d\n", flag_b);
+	if (flag_a == 0 || flag_b == 0)
 		ft_printf("KO\n");
+	else
+		ft_printf("OK\n");
 }
 
 void    read_instructions(t_massive *s)

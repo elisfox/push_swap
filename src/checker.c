@@ -6,22 +6,21 @@ void error_stack(void)
     exit(1);
 }
 
-void check_doubles(t_massive *s)
+void check_doubles(int *tab, int size)
 {
-    int *tab;
     int i;
     int j;
     
     i = 0;
     j = 0;
-    tab = s->tab;
-    while(i < s->size)
+    while(i < size)
     {
         j = i + 1;
-        while(j < s->size)
+        while(j < size)
         {
-            if(tab[i] == tab[j] && i != j)
+            if(tab[i] == tab[j])
                 error_stack();
+            j++;
         }
         i++;
     }
@@ -66,7 +65,7 @@ int *create_array(int count, char ***args)
     if(!(tab = (int *)malloc(sizeof(int) * count)))
         return (NULL);
     count = 0;
-    while(args[i] != NULL)
+    while(args[i])
     {
         j = 0;
         while(args[i][j])
@@ -78,7 +77,6 @@ int *create_array(int count, char ***args)
         }
         i++;
     }
-    printf("!!!");
     return (tab);            
 }
 
@@ -124,7 +122,7 @@ void valid_args(t_massive *s, int ac, char **av)
     args = extract_numbers(ac, av);
     s->size = count_numbers(args);
     s->tab = create_array(s->size, args);
-    check_doubles(s);    
+    check_doubles(s->tab, s->size);   
 }
 
 t_stack *add_elem(t_stack *first, int i)
@@ -174,7 +172,7 @@ void init_stack_a(t_massive *s, char **av, int ac)
         error_stack();
     head = s->a;
     s->a->val = s->tab[i++];
-    s->a->size = s->size;
+    //s->a->size = s->size;
     while(i < s->size)
         s->a = add_elem(s->a, s->tab[i++]);
     s->a->next = NULL;
@@ -183,15 +181,16 @@ void init_stack_a(t_massive *s, char **av, int ac)
     get_index(s->a, new_tab);
 }
 
-t_stack *init_stack_b(t_massive *s)
+/*t_stack *init_stack_b(t_massive *s)
 {
+    s->b = 0;
     if(!(s->b = (t_stack *)ft_memalloc(sizeof(t_stack))))
         error_stack();
     s->b->index = 0;
     s->b->val = 0;
     s->b->next = NULL;
     return(s->b);    
-}
+}*/
 
 int main(int ac, char **av)
 {
@@ -202,26 +201,25 @@ int main(int ac, char **av)
 	if (ac >= 2)
     {
         init_stack_a(s, av, ac);
-        s->b = init_stack_b(s);
-        //if(!(s->b = (t_stack *)ft_memalloc(sizeof(t_stack))))
-          //  error_stack();
-        /*printf("s->a\n");
+        s->b = NULL;
+        printf("s->a\n");
         print_stack(s->a);
-        printf("\ns->b\n");
-        print_stack(s->b);*/
-        read_instructions(s);
-        /*push_b(s);
-        push_a(s);
-        push_a(s);
-        printf("\n");
+        printf("s->b\n");
+        print_stack(s->b);
+        push_b(s);
+        push_b(s);
+        printf("s->a\n");
         print_stack(s->a);
         printf("\n");
-        print_stack(s->b);*/
-
-        /* printf("\n");
-        s->a = rotate_a_b(s->a);
-        print_stack(s->a);*/
-
+        printf("s->b\n");
+        print_stack(s->b);
+        push_b(s);
+        //read_instructions(s);
+        printf("s->a\n");
+        print_stack(s->a);
+        printf("\n");
+        printf("s->b\n");
+        print_stack(s->b);
     }
     return(0);
 }
