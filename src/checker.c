@@ -220,6 +220,17 @@ int main(int ac, char **av)
         printf("\n");
         printf("s->b\n");
         print_stack(s->b);
+        
+        push_a(s);
+        push_a(s);
+        push_a(s);
+        push_b(s);
+        printf("s->a\n");
+        print_stack(s->a);
+        printf("\n");
+        printf("s->b\n");
+        print_stack(s->b);
+
     }
     return(0);
 }

@@ -41,28 +41,22 @@ void push_b(t_massive *s)
     }
 }*/
 
-/*void push_a(t_massive *s)
+void push_a(t_massive *s)
 {
     t_stack *tmp;
 
-    if (s->b == NULL)
-        return;
     tmp = s->b;
     s->b = s->b->next;
-    if (s->a == NULL)
+    if (tmp == NULL)
+        return;
+    else if (s->a == NULL)
     {   
-        s->a = s->b;
+        s->a = tmp;
         s->a->next = NULL;
-    }
-    else if (s->a->index == 0)
-    {
-        s->a = NULL;
-        tmp->next = s->a;
-        s->a = tmp;
-    }
+    }    
     else
-    {    
+    {
         tmp->next = s->a;
         s->a = tmp;
     }
-}*/
+}
