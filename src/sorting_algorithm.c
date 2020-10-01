@@ -46,17 +46,15 @@ void    half_sort(t_massive *s)
             s->a = rotate_a_b(s->a);
         i++;        
     }
-        print_stack(s->a, s->b);
+        /*print_stack(s->a, s->b);
         printf("\n");
-        getchar();
+        getchar();*/
     sort(s); //отсортировать б
     while (s->a->index == s->bottom + 1) //кинуть вниз а отсортированные
         a_to_bottom(s);
-        /*printf("s->a\n");
-        print_stack(s->a);
+
+        /*print_stack(s->a, s->b);
         printf("\n");
-        printf("s->b\n");
-        print_stack(s->b);
         getchar();*/
     s->top = s->size + 1;
     while(s->a->index != 1) //кинуть вторую половину в б
@@ -66,33 +64,21 @@ void    half_sort(t_massive *s)
         else
             push_b(s);
     }
-       /* printf("s->a\n");
-        print_stack(s->a);
+      /* print_stack(s->a, s->b);
         printf("\n");
-        printf("s->b\n");
-        print_stack(s->b);
         getchar();*/
     sort(s); //отсортировать вторую половину б
-        /*printf("s->a\n");
-        print_stack(s->a);
+        /*print_stack(s->a, s->b);
         printf("\n");
-        printf("s->b\n");
-        print_stack(s->b);
         getchar();*/
     a_to_bottom(s); //кинуть вниз а отсортированные
-        /*printf("s->a\n");
-        print_stack(s->a);
-        printf("\n");
-        printf("s->b\n");
-        print_stack(s->b);
-        getchar();*/
 }
 
 void    sorting_algorithm(t_massive *s)
 {
-    print_stack(s->a, s->b);
+   /* print_stack(s->a, s->b);
     printf("\n");
-    getchar();
+    getchar();*/
     if (s->size < 50)
         half_sort(s);
     print_stack(s->a, s->b);

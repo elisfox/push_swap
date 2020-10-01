@@ -2,7 +2,7 @@
 
 void print_stack(t_stack *a, t_stack *b)
 {
-    ft_printf("_  _\na  b\n");
+    ft_printf("_   _\na   b\n");
     while(a || b)
     {
         if (a)
@@ -13,7 +13,7 @@ void print_stack(t_stack *a, t_stack *b)
         else
             printf("#");
         
-        printf("  ");
+        printf("   ");
         if(b)
         {
             printf("%d", b->index);
