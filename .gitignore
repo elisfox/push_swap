@@ -1,6 +1,7 @@
 .idea
 a.out
 checker
+libft/libft.a
 
 # Prerequisites
 *.d
