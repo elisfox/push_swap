@@ -168,7 +168,6 @@ void init_stack_a(t_massive *s, char **av, int ac)
         exit_error();
     head = s->a;
     s->a->val = s->tab[i++];
-    //s->a->size = s->size;
     while(i < s->size)
         s->a = add_elem(s->a, s->tab[i++]);
     s->a->next = NULL;
@@ -176,17 +175,6 @@ void init_stack_a(t_massive *s, char **av, int ac)
     s->a = head;
     get_index(s->a, new_tab);
 }
-
-/*t_stack *init_stack_b(t_massive *s)
-{
-    s->b = 0;
-    if(!(s->b = (t_stack *)ft_memalloc(sizeof(t_stack))))
-        exit_error();
-    s->b->index = 0;
-    s->b->val = 0;
-    s->b->next = NULL;
-    return(s->b);    
-}*/
 
 int main(int ac, char **av)
 {
