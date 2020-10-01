@@ -1,5 +1,30 @@
 #include "push_swap.h"
 
+void print_stack(t_stack *a, t_stack *b)
+{
+    ft_printf("_  _\na  b\n");
+    while(a || b)
+    {
+        if (a)
+        {
+            printf("%d", a->index);
+            a = a->next;
+        }
+        else
+            printf("#");
+        
+        printf("  ");
+        if(b)
+        {
+            printf("%d", b->index);
+            b = b->next;
+        }
+        else
+            printf("#");
+        printf("\n");
+    }
+}
+
 void exit_error(void)
 {
     ft_printf("%s\n", "Error");

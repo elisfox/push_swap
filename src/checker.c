@@ -28,11 +28,6 @@ int main(int ac, char **av)
         printf("s->b\n");
         print_stack(s->b);*/
         read_instructions(s);
-        printf("s->a\n");
-        print_stack(s->a);
-        printf("\n");
-        printf("s->b\n");
-        print_stack(s->b);
     }
     return(0);
 }

@@ -55,8 +55,9 @@ void rr(t_stack *stack_a, t_stack *stack_b);
 void rrr(t_stack *stack_a, t_stack *stack_b);
 void push_a(t_massive *s);
 void push_b(t_massive *s);
-void print_stack(t_stack *a);
+void print_stack(t_stack *a, t_stack *b);
 void    read_instructions(t_massive *s);
 long long	ft_atoi_ps(const char *str);
 void    sorting_algorithm(t_massive *s);
+
 #endif

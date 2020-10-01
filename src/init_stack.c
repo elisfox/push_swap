@@ -131,14 +131,6 @@ t_stack *add_elem(t_stack *first, int i)
     new->val = i;
     return(new);    
 }
-void print_stack(t_stack *a)
-{
-    while(a)
-    {
-        printf("elem=%d, index=%d\n", a->val, a->index);
-        a = a->next;
-    }
-}
 
 void get_index(t_stack *a, int *new_tab)
 {
