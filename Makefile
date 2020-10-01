@@ -10,6 +10,7 @@
 #                                                                              #
 #******************************************************************************#
 
+NAME_push = push_swap
 NAME_checker = checker
 
 ifndef VERBOSE
@@ -24,23 +25,34 @@ LIBFT_PATH = libft/
 FLAGS = -Wall -Werror -Wextra
 INC = -I ./includes/ -I ./$(LIBFT_PATH)includes/
 
-SRCS_NAME = checker.c \
-            pa_pb.c \
+SRCS_NAME = pa_pb.c \
             ra_rb_rr.c \
             read_instructions.c \
             sa_sb_ss.c \
             selection_sort.c \
 			help_functions.c
 
-SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
-OBJ = $(addprefix $(OBJ_PATH), $(SRCS_NAME:.c=.o))
+SRCS_CHECKER = checker.c $(SRCS_NAME)
 
-all: $(NAME_checker)
+SRCS_PUSH = push_swap.c $(SRCS_NAME)
 
-$(NAME_checker): $(OBJ)
+SRCS_CHECKER_FULL = $(addprefix $(SRCS_PATH), $(SRCS_CHECKER))
+SRCS_PUSH_FULL = $(addprefix $(SRCS_PATH), $(SRCS_PUSH))
+OBJ_CHECKER = $(addprefix $(OBJ_PATH), $(SRCS_CHECKER:.c=.o))
+OBJ_PUSH = $(addprefix $(OBJ_PATH), $(SRCS_PUSH:.c=.o))
+
+all: $(NAME_checker) $(NAME_push)
+
+$(NAME_push) : $(OBJ_PUSH)
 	@make -w -C $(LIBFT_PATH)
 	@echo "\033[92m$(LIBFT_PATH)\033[0m compiled."
-	@gcc $(FLAGS) $(OBJ) $(INC) -L $(LIBFT_PATH) -lft -o $(NAME_checker)
+	@gcc $(FLAGS) $(OBJ_PUSH) $(INC) -L $(LIBFT_PATH) -lft -o $(NAME_push)
+	@echo "\033[35m$(NAME_push)\033[0m created."
+
+$(NAME_checker): $(OBJ_CHECKER)
+	@make -w -C $(LIBFT_PATH)
+	@echo "\033[92m$(LIBFT_PATH)\033[0m compiled."
+	@gcc $(FLAGS) $(OBJ_CHECKER) $(INC) -L $(LIBFT_PATH) -lft -o $(NAME_checker)
 	@echo "\033[35m$(NAME_checker)\033[0m created."
 
 $(OBJ_PATH)%.o: $(SRCS_PATH)%.c
