@@ -1,11 +1,5 @@
 #include "push_swap.h"
 
-void error_stack(void)
-{
-    ft_printf("%s\n", "Error");
-    exit(1);
-}
-
 void check_doubles(int *tab, int size)
 {
     int i;
@@ -19,7 +13,7 @@ void check_doubles(int *tab, int size)
         while(j < size)
         {
             if(tab[i] == tab[j])
-                error_stack();
+                exit_error();
             j++;
         }
         i++;
@@ -44,11 +38,11 @@ void check_numbers(int ac, char **av)
             if((av[i][j] == '-' || av[i][j] == '+' || av[i][j] == ' ') && ft_isdigit(av[i][j + 1]))
                 j++;
             if (!ft_isdigit(av[i][j]) && av[i][j] != '\0')
-				error_stack();
+				exit_error();
             while (ft_isdigit(av[i][j]))
 				j++;
             if(!ft_isspace(av[i][j]) && av[i][j] != '\0')
-                error_stack();
+                exit_error();
        }
        i++;
     }
@@ -70,7 +64,9 @@ int *create_array(int count, char ***args)
         j = 0;
         while(args[i][j])
         {
-            tab[count] = (int)(ft_atoi(args[i][j]));
+            tab[count] = (int)(ft_atoi_ps(args[i][j]));
+            if (ft_strcmp(args[i][j], ft_itoa(tab[count])) != 0)
+                exit_error();
             printf("tab = %d\n", tab[count]);
             j++;
             count++;
@@ -130,7 +126,7 @@ t_stack *add_elem(t_stack *first, int i)
     t_stack *new;
 
     if(!(new = (t_stack *)ft_memalloc(sizeof(t_stack))))
-        error_stack();
+        exit_error();
     first->next = new;
     new->val = i;
     return(new);    
@@ -169,7 +165,7 @@ void init_stack_a(t_massive *s, char **av, int ac)
     i = 0;
     valid_args(s, ac, av);
     if(!(s->a = (t_stack *)ft_memalloc(sizeof(t_stack))))
-        error_stack();
+        exit_error();
     head = s->a;
     s->a->val = s->tab[i++];
     //s->a->size = s->size;
@@ -185,7 +181,7 @@ void init_stack_a(t_massive *s, char **av, int ac)
 {
     s->b = 0;
     if(!(s->b = (t_stack *)ft_memalloc(sizeof(t_stack))))
-        error_stack();
+        exit_error();
     s->b->index = 0;
     s->b->val = 0;
     s->b->next = NULL;
@@ -197,7 +193,7 @@ int main(int ac, char **av)
     t_massive *s;
 
     if (!(s = (t_massive *)ft_memalloc(sizeof(t_massive))))
-		error_stack();
+		exit_error();
 	if (ac >= 2)
     {
         init_stack_a(s, av, ac);

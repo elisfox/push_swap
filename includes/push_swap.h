@@ -34,25 +34,14 @@ typedef struct		s_massive
 	t_stack			*b;
 }					t_massive;
 
-typedef enum e_command {SA, SB, RR} command;
+typedef enum e_command {SA, SB, SS, PA, PB, RA, RB, RR, RRA, RRB, RRR} command;
 
 typedef struct s_instr
 {
     command comm;
-    int     sa;
-    int     sb;
-    int     ss;
-    int     pa;
-    int     pb;
-    int     ra;
-    int     rb;
-    int     rr;
-    int     rra;
-    int     rrb;
-    int     rrr;
 }              t_instr;
 
-void error_stack(void);
+void exit_error(void);
 int *sort_tab(int *arr, int size);
 t_stack *rotate_a_b(t_stack *stack);
 void swap_a_b(t_stack *stack);
@@ -64,4 +53,5 @@ void push_a(t_massive *s);
 void push_b(t_massive *s);
 void print_stack(t_stack *a);
 void    read_instructions(t_massive *s);
+long long	ft_atoi_ps(const char *str);
 #endif

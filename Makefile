@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: bcolossu <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/05/11 20:49:09 by bcolossu          #+#    #+#              #
-#    Updated: 2020/05/21 19:42:55 by bcolossu         ###   ########.fr        #
+#    Created: 2020/05/11 20:49:09 by jojoseph          #+#    #+#              #
+#    Updated: 2020/05/21 19:42:55 by jojoseph         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -29,7 +29,8 @@ SRCS_NAME = checker.c \
             ra_rb_rr.c \
             read_instructions.c \
             sa_sb_ss.c \
-            selection_sort.c
+            selection_sort.c \
+			help_functions.c
 
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
 OBJ = $(addprefix $(OBJ_PATH), $(SRCS_NAME:.c=.o))
