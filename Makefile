@@ -30,7 +30,8 @@ SRCS_NAME = pa_pb.c \
             read_instructions.c \
             sa_sb_ss.c \
             selection_sort.c \
-			help_functions.c
+			help_functions.c \
+			sorting_algorithm.c
 
 SRCS_CHECKER = checker.c $(SRCS_NAME)
 

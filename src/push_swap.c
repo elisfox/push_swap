@@ -12,6 +12,6 @@ int			main(int ac, char **av)
         s->b = NULL;
         s->bottom = 0;
         s->top = s->size / 2 + 1;
-        sorting_algorithm(*s);
+        sorting_algorithm(s);
     }
 }

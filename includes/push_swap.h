@@ -44,6 +44,7 @@ typedef struct s_instr
     command comm;
 }              t_instr;
 
+void init_stack_a(t_massive *s, char **av, int ac);
 void exit_error(void);
 int *sort_tab(int *arr, int size);
 t_stack *rotate_a_b(t_stack *stack);
@@ -57,4 +58,5 @@ void push_b(t_massive *s);
 void print_stack(t_stack *a);
 void    read_instructions(t_massive *s);
 long long	ft_atoi_ps(const char *str);
+void    sorting_algorithm(t_massive *s);
 #endif
