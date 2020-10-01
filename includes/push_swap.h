@@ -30,6 +30,9 @@ typedef struct		s_massive
 {
 	int				*tab;
 	int				size;
+    int             top;
+    int             bottom;
+    int             middle;
 	t_stack			*a;
 	t_stack			*b;
 }					t_massive;
