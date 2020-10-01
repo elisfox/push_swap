@@ -13,5 +13,10 @@ int			main(int ac, char **av)
         s->bottom = 0;
         s->top = s->size / 2 + 1;
         sorting_algorithm(s);
+        printf("s->a\n");
+        print_stack(s->a);
+        printf("\n");
+        printf("s->b\n");
+        print_stack(s->b);
     }
 }

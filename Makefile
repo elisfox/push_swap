@@ -31,7 +31,8 @@ SRCS_NAME = pa_pb.c \
             sa_sb_ss.c \
             selection_sort.c \
 			help_functions.c \
-			sorting_algorithm.c
+			sorting_algorithm.c \
+			init_stack.c
 
 SRCS_CHECKER = checker.c $(SRCS_NAME)
 

@@ -2,6 +2,7 @@
 .vscode
 a.out
 checker
+push_swap
 libft/libft.a
 
 # Prerequisites
