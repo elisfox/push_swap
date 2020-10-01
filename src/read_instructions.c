@@ -1,4 +1,4 @@
-#include "../includes/push_swap.h"
+#include "push_swap.h"
 
 
 void	make_instr(t_massive *s, t_instr *instr)

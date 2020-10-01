@@ -1,22 +1,27 @@
-# **************************************************************************** #
+#******************************************************************************#
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rrhaenys <rrhaenys@student.42.fr>          +#+  +:+       +#+         #
+#    By: bcolossu <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/01/30 19:01:08 by rrhaenys          #+#    #+#              #
-#    Updated: 2019/02/20 17:23:15 by rrhaenys         ###   ########.fr        #
+#    Created: 2020/05/11 20:49:09 by bcolossu          #+#    #+#              #
+#    Updated: 2020/05/21 19:42:55 by bcolossu         ###   ########.fr        #
 #                                                                              #
-# **************************************************************************** #
+#******************************************************************************#
+
 NAME_checker = checker
+
+ifndef VERBOSE
+MAKEFLAGS += --no-print-directory
+endif
 
 ### PATH ###
 SRCS_PATH = src/
 OBJ_PATH  = obj/
 LIBFT_PATH = libft/
 
-FLAGS = #-Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra
 INC = -I ./includes/ -I ./$(LIBFT_PATH)includes/
 
 SRCS_NAME = checker.c \
