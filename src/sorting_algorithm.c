@@ -28,7 +28,10 @@ void    sort(t_massive *s)
         else if(s->b->index == s->top - 1)
             b_to_top(s);
         else
-            s->b = rr_a_b(s->b);
+            s->b = rotate_a_b(s->b);
+       /* print_stack(s->a, s->b);
+        printf("\n");
+        getchar();     */   
     }
 }
 
@@ -71,7 +74,8 @@ void    half_sort(t_massive *s)
         /*print_stack(s->a, s->b);
         printf("\n");
         getchar();*/
-    a_to_bottom(s); //кинуть вниз а отсортированные
+    while(s->a->index != 1)
+        a_to_bottom(s); //кинуть вниз а отсортированные
 }
 
 void    sorting_algorithm(t_massive *s)
