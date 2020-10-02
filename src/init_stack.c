@@ -67,7 +67,7 @@ int *create_array(int count, char ***args)
             tab[count] = (int)(ft_atoi_ps(args[i][j]));
             if (ft_strcmp(args[i][j], ft_itoa(tab[count])) != 0)
                 exit_error();
-            printf("tab = %d\n", tab[count]);
+            //printf("tab = %d\n", tab[count]);
             j++;
             count++;
         }
