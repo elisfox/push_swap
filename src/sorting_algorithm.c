@@ -110,11 +110,30 @@ void    quarter_sort(t_massive *s)
         print_stack(s->a, s->b);
     printf("\n");
     getchar();
-    s->middle = s->middle + quarter;
+    s->middle = s->size - s->size / 4;
+
     flag = s->size / 2;
+    printf("mid = %d\n", s->middle);
     while (flag--)
         half_b_to_a(s); //перекинуть четверть обратно
-    sort(s); //отсортировали четверт
+    print_stack(s->a, s->b);
+    printf("\n");
+    getchar();
+    printf("size = %d\n", s->size);
+    s->top = s->size - s->size / 4;
+    printf("top = %d\n", s->top);
+    printf("bottom = %d\n", s->bottom);
+    sort(s); //отсортировали четверть
+
+    print_stack(s->a, s->b);
+    printf("\n");
+    getchar();
+
+    flag = s->size;
+    printf("flag = %d\n", flag);
+    printf("mid = %d\n", s->middle);
+    printf("bottom = %d\n", s->bottom);
+    quater_a_to_b(s, flag); //перекинуть последнюю четверть
 
     print_stack(s->a, s->b);
     printf("\n");
