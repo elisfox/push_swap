@@ -14,12 +14,14 @@ t_stack *rotate_a_b(t_stack *stack)
     stack->next = first;
     first->next = NULL;
     return(head);
+    printf("1\n");
 }
 
 void rr(t_stack *stack_a, t_stack *stack_b)
 {
     rotate_a_b(stack_a);
     rotate_a_b(stack_b);
+    printf("1\n");
 }
 
 t_stack *rr_a_b(t_stack *stack)
@@ -43,10 +45,12 @@ t_stack *rr_a_b(t_stack *stack)
     last->next = first;
     prev->next = NULL;
     return (last);
+    printf("1\n");
 }
 
 void rrr(t_stack *stack_a, t_stack *stack_b)
 {
     rr_a_b(stack_a);
     rr_a_b(stack_b);
+    printf("1\n");
 }

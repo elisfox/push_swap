@@ -44,8 +44,6 @@ void quater_a_to_b(t_massive *s)
     int flag;
 
     flag = s->bottom < s->size / 2 ? (s->size / 2 - s->bottom) : (s->size - s->bottom);
-    printf("flag = %d", flag);
-    printf("fl - mid = %d\n", flag - s->middle);
     while(flag--) 
     {
         if (s->a->index == s->bottom + 1)
@@ -81,73 +79,34 @@ void    quarter_sort(t_massive *s)
     flag = 1;
     s->middle = s->size / 2;
         half_a_to_b(s, flag); //перекинуть половину в б
-    print_stack(s->a, s->b);
-    printf("\n");
-    getchar();
     flag = s->middle;
     quarter = s->middle /= 2;
     while (flag--)
         half_b_to_a(s); //перекинуть четверть обратно
     sort(s); //отсортировали четверть
-
-    print_stack(s->a, s->b);
-    printf("\n");
-    getchar();
-    printf("mid = %d\n", s->middle);
-    printf("flag = %d\n", flag);
     flag = s->size / 2 - s->size / 4;
-
     quater_a_to_b(s); //перекинуть вторую четверть
-    
     print_stack(s->a, s->b);
-    printf("\n");
-    getchar();
-    printf("flag = %d\n", flag);
-
     sort(s); //отсортировали половину
-
-    print_stack(s->a, s->b);
-    printf("\n");
-    getchar();
     flag = s->size - s->bottom + 1;
     s->middle = s->size;
-    printf("flag = %d\n", flag);
     half_a_to_b(s, flag); //перекинуть вторую половину в б
-        print_stack(s->a, s->b);
-    printf("\n");
-    getchar();
     s->middle = s->size - s->size / 4;
-
     flag = s->size / 2;
-    printf("mid = %d\n", s->middle);
     while (flag--)
         half_b_to_a(s); //перекинуть четверть обратно
-    print_stack(s->a, s->b);
-    printf("\n");
-    getchar();
-    printf("size = %d\n", s->size);
     s->top = s->size - s->size / 4;
-    printf("top = %d\n", s->top);
-    printf("bottom = %d\n", s->bottom);
     sort(s); //отсортировали четверть
-
-    print_stack(s->a, s->b);
-    printf("\n");
-    getchar();
-
     flag = s->size;
-    printf("flag = %d\n", flag);
-    printf("mid = %d\n", s->middle);
-    printf("bottom = %d\n", s->bottom);
     quater_a_to_b(s); //перекинуть последнюю четверть
     s->top = s->size;
     sort(s); //отсортировано всё
 
 
 
-    print_stack(s->a, s->b);
+    /*print_stack(s->a, s->b);
     printf("\n");
-    getchar();
+    getchar();*/
 
 
 
@@ -189,7 +148,7 @@ void    sorting_algorithm(t_massive *s)
         quarter_sort(s);
     if (s->size < 50)
         half_sort(s);
-    print_stack(s->a, s->b);
+    /*print_stack(s->a, s->b);
     printf("\n");
-    getchar();
+    getchar();*/
 }
