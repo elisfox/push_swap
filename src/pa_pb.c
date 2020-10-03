@@ -18,7 +18,6 @@ void push_b(t_massive *s)
         tmp->next = s->b;
         s->b = tmp;
     }
-    printf("1\n");
 }
 
 void push_a(t_massive *s)
@@ -39,5 +38,4 @@ void push_a(t_massive *s)
         tmp->next = s->a;
         s->a = tmp;
     }
-    printf("1\n");
 }

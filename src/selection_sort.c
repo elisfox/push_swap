@@ -29,7 +29,6 @@ int *sort_tab(int *arr, int size)
 	{
 		int smallest = find_smallest(arr, size);
 		new_arr[i] = arr[smallest];
-        //printf("%d\n", new_arr[i]);
 		arr[smallest] = 999999;
         i++;
 	}

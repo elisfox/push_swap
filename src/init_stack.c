@@ -67,7 +67,6 @@ int *create_array(int count, char ***args)
             tab[count] = (int)(ft_atoi_ps(args[i][j]));
             if (ft_strcmp(args[i][j], ft_itoa(tab[count])) != 0)
                 exit_error();
-            //printf("tab = %d\n", tab[count]);
             j++;
             count++;
         }
@@ -143,7 +142,6 @@ void get_index(t_stack *a, int *new_tab)
         while(a->val != new_tab[j])
             j++;
         a->index = j + 1;
-        //printf("elem=%d, index=%d\n", a->val, a->index);
         a = a->next;
     }
 }
