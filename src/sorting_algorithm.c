@@ -39,14 +39,19 @@ void half_a_to_b(t_massive *s, int flag)
     }  
 }
 
-void quater_a_to_b(t_massive *s, int flag)
+void quater_a_to_b(t_massive *s)
 {
-    while(flag - s->middle--) 
+    int flag;
+
+    flag = s->bottom < s->size / 2 ? (s->size / 2 - s->bottom) : (s->size - s->bottom);
+    printf("flag = %d", flag);
+    printf("fl - mid = %d\n", flag - s->middle);
+    while(flag--) 
     {
         if (s->a->index == s->bottom + 1)
             a_to_bottom(s);
         else
-            push_b(s);        
+            push_b(s);   
     }
 }
 
@@ -90,8 +95,9 @@ void    quarter_sort(t_massive *s)
     getchar();
     printf("mid = %d\n", s->middle);
     printf("flag = %d\n", flag);
+    flag = s->size / 2 - s->size / 4;
 
-    quater_a_to_b(s, flag); //перекинуть вторую четверть
+    quater_a_to_b(s); //перекинуть вторую четверть
     
     print_stack(s->a, s->b);
     printf("\n");
@@ -133,7 +139,11 @@ void    quarter_sort(t_massive *s)
     printf("flag = %d\n", flag);
     printf("mid = %d\n", s->middle);
     printf("bottom = %d\n", s->bottom);
-    quater_a_to_b(s, flag); //перекинуть последнюю четверть
+    quater_a_to_b(s); //перекинуть последнюю четверть
+    s->top = s->size;
+    sort(s); //отсортировано всё
+
+
 
     print_stack(s->a, s->b);
     printf("\n");
