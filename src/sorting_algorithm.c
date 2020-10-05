@@ -111,9 +111,9 @@ void    quarter_sort(t_massive *s)
     
     half_a_to_b(s, flag); //перекинуть половину в б
         
-    print_stack(s->a, s->b);
+   /* print_stack(s->a, s->b);
     printf("\n");
-    getchar();
+    getchar();*/
     
     flag = s->middle;
     quarter = s->middle /= 2;
@@ -139,32 +139,6 @@ void    quarter_sort(t_massive *s)
     /*print_stack(s->a, s->b);
     printf("\n");
     getchar();*/
-}
-
-void    max_sort(t_massive *s)
-{
-    int flag;
-    int quarter; 
-
-    flag = 1;
-    s->middle = s->size / 2;
-    half_a_to_b(s, flag); //перекинуть половину в б
-    print_stack(s->a, s->b);
-    printf("\n");
-    getchar();
-    flag = s->middle;
-    quarter = s->middle /= 2;
-    while (flag--)
-        half_b_to_a(s); //перекинуть четверть обратно
-    flag = s->middle / 2;
-    quarter = s->middle /= 4;
-    while (flag--)
-        half_b_to_a(s); //перекинуть четверть обратно
-
-        
-    print_stack(s->a, s->b);
-    printf("\n");
-    getchar();
 }
 
 void    half_sort(t_massive *s)
@@ -203,38 +177,40 @@ void    half_sort(t_massive *s)
     sort(s); //отсортировать вторую половину б
 }
 
-void	ft_clearstr_stack(t_massive *s)
+void ft_clearstr_stack(t_massive *s)
 {
-	char	*ptr;
+    char *ptr;
 
-	ptr = s->message;
-	while (*ptr != '\0')
-	{
-		if (ft_strncmp(ptr, "pa\npb\n", 6) == 0)
-		{
-			ft_strcpy(ptr, (ptr + 6));
-			ptr = s->message;
-		}
-		else if (ft_strncmp(ptr, "pb\npa\n", 6) == 0)
-		{
-			ft_strcpy(ptr, (ptr + 6));
-			ptr = s->message;
-		}
-		else if (ft_strncmp(ptr, "\nrb\nrrb", 7) == 0)
-		{
-			ft_strcpy(ptr, (ptr + 7));
-			ptr = s->message;
-		}
-        else if (ft_strncmp(ptr, "ra\nrb\n", 6) == 0)
-		{
-			ft_strcpy(ptr, "rr\n");
-            ft_strcpy(ptr, (ptr + 3));
-			ptr = s->message;
-		}
-
-		else
-			ptr++;
-	}
+    ptr = s->message;
+ char *str;
+    while (*ptr != '\0')
+    {
+        if (ft_strncmp(ptr, "pa\npb\n", 6) == 0)
+        {
+            ft_strcpy(ptr, (ptr + 6));
+            ptr = s->message;
+        }
+        else if (ft_strncmp(ptr, "pb\npa\n", 6) == 0)
+        {
+            ft_strcpy(ptr, (ptr + 6));
+            ptr = s->message;
+        }
+        else if (ft_strncmp(ptr, "\nrb\nrrb", 7) == 0)
+        {
+            ft_strcpy(ptr, (ptr + 7));
+            ptr = s->message;
+        }
+        else if (ft_strncmp(ptr, "ra\nrb\n", 4) == 0)
+        {
+            str = ft_strdup(ptr + 6);
+            ft_strcpy(ptr, "rr\n");
+            ptr = s->message;
+            ptr = ft_strjoin_f(ptr, str, 1);
+            s->message = ptr;
+        }
+        else
+            ptr++;
+    }
 }
 
 void    sorting_algorithm(t_massive *s)

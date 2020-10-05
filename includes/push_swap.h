@@ -60,5 +60,6 @@ void print_stack(t_stack *a, t_stack *b);
 void    read_instructions(t_massive *s);
 long long	ft_atoi_ps(const char *str);
 void    sorting_algorithm(t_massive *s);
+void    max_sort(t_massive *s);
 
 #endif
