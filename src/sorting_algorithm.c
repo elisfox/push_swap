@@ -104,7 +104,17 @@ void    quarter_sort(t_massive *s)
 
     flag = 1;
     s->middle = s->size / 2;
-        half_a_to_b(s, flag); //перекинуть половину в б
+    /*printf("flag = %d", flag);
+    printf("s->size = %d", s->size);
+    printf("s->mid = %d", s->middle);
+    getchar();*/
+    
+    half_a_to_b(s, flag); //перекинуть половину в б
+        
+    print_stack(s->a, s->b);
+    printf("\n");
+    getchar();
+    
     flag = s->middle;
     quarter = s->middle /= 2;
     while (flag--)
@@ -126,16 +136,35 @@ void    quarter_sort(t_massive *s)
     quater_a_to_b(s); //перекинуть последнюю четверть
     s->top = s->size;
     sort(s); //отсортировано всё
-
-
-
     /*print_stack(s->a, s->b);
     printf("\n");
     getchar();*/
+}
 
+void    max_sort(t_massive *s)
+{
+    int flag;
+    int quarter; 
 
+    flag = 1;
+    s->middle = s->size / 2;
+    half_a_to_b(s, flag); //перекинуть половину в б
+    print_stack(s->a, s->b);
+    printf("\n");
+    getchar();
+    flag = s->middle;
+    quarter = s->middle /= 2;
+    while (flag--)
+        half_b_to_a(s); //перекинуть четверть обратно
+    flag = s->middle / 2;
+    quarter = s->middle /= 4;
+    while (flag--)
+        half_b_to_a(s); //перекинуть четверть обратно
 
-
+        
+    print_stack(s->a, s->b);
+    printf("\n");
+    getchar();
 }
 
 void    half_sort(t_massive *s)
@@ -143,6 +172,7 @@ void    half_sort(t_massive *s)
     int flag;
 
     flag = 1;
+
     s->middle = s->size / 2;
     while (flag <= s->size) //перекинуть половину в б
     {
@@ -212,12 +242,14 @@ void    sorting_algorithm(t_massive *s)
    /* print_stack(s->a, s->b);
     printf("\n");
     getchar();*/
+   if (s->size >= 100)
+        max_sort(s);
     if (s->size >= 50)
         quarter_sort(s);
     if (s->size < 50)
         half_sort(s);
     //ft_clearstr_stack(s);
-    ft_printf("%s", s->message);
+    //ft_printf("%s", s->message);
 	free(s->message);
     /*print_stack(s->a, s->b);
     printf("\n");
