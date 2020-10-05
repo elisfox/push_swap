@@ -173,6 +173,40 @@ void    half_sort(t_massive *s)
     sort(s); //отсортировать вторую половину б
 }
 
+void	ft_clearstr_stack(t_massive *s)
+{
+	char	*ptr;
+
+	ptr = s->message;
+	while (*ptr != '\0')
+	{
+		if (ft_strncmp(ptr, "pa\npb\n", 6) == 0)
+		{
+			ft_strcpy(ptr, (ptr + 6));
+			ptr = s->message;
+		}
+		else if (ft_strncmp(ptr, "pb\npa\n", 6) == 0)
+		{
+			ft_strcpy(ptr, (ptr + 6));
+			ptr = s->message;
+		}
+		else if (ft_strncmp(ptr, "\nrb\nrrb", 7) == 0)
+		{
+			ft_strcpy(ptr, (ptr + 7));
+			ptr = s->message;
+		}
+        else if (ft_strncmp(ptr, "ra\nrb\n", 6) == 0)
+		{
+			ft_strcpy(ptr, "rr\n");
+            ft_strcpy(ptr, (ptr + 3));
+			ptr = s->message;
+		}
+
+		else
+			ptr++;
+	}
+}
+
 void    sorting_algorithm(t_massive *s)
 {
    /* print_stack(s->a, s->b);
@@ -182,6 +216,9 @@ void    sorting_algorithm(t_massive *s)
         quarter_sort(s);
     if (s->size < 50)
         half_sort(s);
+    //ft_clearstr_stack(s);
+    ft_printf("%s", s->message);
+	free(s->message);
     /*print_stack(s->a, s->b);
     printf("\n");
     getchar();*/
