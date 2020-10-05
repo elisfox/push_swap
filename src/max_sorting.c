@@ -45,11 +45,11 @@ static void half_a_to_b(t_massive *s, int flag)
     }  
 }
 
-static void quater_a_to_b(t_massive *s)
+static void quater_a_to_b(t_massive *s, int flag)
 {
-    int flag;
+    //int flag;
 
-    flag = s->bottom < s->size / 4 ? (s->size / 4 - s->bottom) : (s->size - s->bottom);
+    //flag = s->bottom < s->size / 4 ? (s->size / 4 - s->bottom) : (s->size - s->bottom);
     while(flag--) 
     {
         if (s->a->index == s->bottom + 1)
@@ -124,7 +124,8 @@ void    max_sort(t_massive *s)
     getchar();
     sort(s); //отсортировать 1/8
     flag = s->size / 4 - s->size / 8;
-    quater_a_to_b(s); //перекинуть вторую 1/8
+    flag = s->size / 4 - s->bottom;
+    quater_a_to_b(s, flag); //перекинуть вторую 1/8
         print_stack(s->a, s->b);
     printf("\n");
     getchar();
@@ -134,8 +135,28 @@ void    max_sort(t_massive *s)
     print_stack(s->a, s->b);
     printf("\n");
     getchar();
-    //flag = s->size / 2 - s->size / 4;
-    //quater_a_to_b(s); //перекинуть вторую четверть
+    printf("flag = %d\n", flag);
+    printf("mid = %d\n", s->middle);
+    flag = s->size / 2 - s->bottom;
+    quater_a_to_b(s, flag); //перекинуть вторую четверть
+
+    print_stack(s->a, s->b);
+    printf("\n");
+    getchar();
+
+    flag = s->size / 2 - s->bottom;
+    printf("flag = %d\n", flag);
+    s->middle = s->size / 8 + s->size /4;
+    printf("s->middle = %d\n", s->middle);
+    while (flag--)
+        half_b_to_a(s); //перекинуть 1/8 обратно
+    sort(s); // отсортировали 1/4 + 1/8
+    flag = s->size / 2 - s->bottom;
+    printf("flag = %d\n", flag);
+    quater_a_to_b(s, flag); //перекинуть третью 1/8
+    sort(s); // отсортировали половину
+
+    
 
 
         
