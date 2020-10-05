@@ -12,6 +12,7 @@ int			main(int ac, char **av)
         s->b = NULL;
         s->bottom = 0;
         s->top = s->size / 2 + 1;
+        s->message = ft_strdup("");
         sorting_algorithm(s);
         //print_stacks(s);
         /*printf("s->a\n");

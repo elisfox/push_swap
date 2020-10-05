@@ -27,7 +27,8 @@ typedef struct		s_stack
 }					t_stack;
 
 typedef struct		s_massive
-{
+{	
+	char			*message;
 	int				*tab;
 	int				size;
     int             top;

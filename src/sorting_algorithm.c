@@ -3,23 +3,23 @@
 void b_to_bottom(t_massive *s)
 {
     push_a(s);
-    ft_printf("pa\n");
+    s->message = ft_strjoin_f(s->message, "pa\n", 1);
     s->a = rotate_a_b(s->a);
-    ft_printf("ra\n");
+    s->message = ft_strjoin_f(s->message, "ra\n", 1);
     s->bottom++;
 }
 
 void b_to_top(t_massive *s)
 {
     push_a(s);
-    ft_printf("pa\n");
+    s->message = ft_strjoin_f(s->message, "pa\n", 1);
     s->top--;
 }
 
 void a_to_bottom(t_massive *s)
 {
     s->a = rotate_a_b(s->a);
-    ft_printf("ra\n");
+    s->message = ft_strjoin_f(s->message, "ra\n", 1);
     s->bottom++;
 }
 
@@ -28,12 +28,14 @@ void half_b_to_a(t_massive *s)
     if (s->b->index <= s->middle)
     {
         s->b = rotate_a_b(s->b);
-        ft_printf("rb\n");
+        s->message = ft_strjoin_f(s->message, "rb\n", 1);
     }
     else
     {
         push_a(s);
-        ft_printf("pa\n");
+        s->message = ft_strjoin_f(s->message, "pa\n", 1);
+        if (s->a->index == s->bottom + 1)
+            a_to_bottom(s);
     }
 }
 
@@ -41,15 +43,20 @@ void half_a_to_b(t_massive *s, int flag)
 {
     while (flag <= s->size)
     {
+        if (s->a->index == s->bottom + 1 && s->a->index >= s->size / 2)
+        {
+            a_to_bottom(s);
+            flag++;
+        }
         if(s->a->index <= s->middle)
         {
             push_b(s);
-            ft_printf("pb\n");
+            s->message = ft_strjoin_f(s->message, "pb\n", 1);
         }
         else
         {
             s->a = rotate_a_b(s->a);
-            ft_printf("ra\n");
+            s->message = ft_strjoin_f(s->message, "ra\n", 1);
         }
         flag++;
     }  
@@ -67,7 +74,7 @@ void quater_a_to_b(t_massive *s)
         else
         {
             push_b(s);
-            ft_printf("pb\n");
+            s->message = ft_strjoin_f(s->message, "pb\n", 1);
         }   
     }
 }
@@ -83,7 +90,7 @@ void    sort(t_massive *s)
         else
         {
             s->b = rotate_a_b(s->b);
-            ft_printf("rb\n");
+            s->message = ft_strjoin_f(s->message, "rb\n", 1);
         }
         while (s->a->index == s->bottom + 1) //кинуть вниз а отсортированные
             a_to_bottom(s); 
@@ -114,16 +121,7 @@ void    quarter_sort(t_massive *s)
     while (flag--)
         half_b_to_a(s); //перекинуть четверть обратно
     s->top = s->size - s->size / 4;
-    /*printf("top = %d\n", s->top);
-    print_stack(s->a, s->b);
-    printf("\n");
-    getchar();*/
-
     sort(s); //отсортировали четверть
-
-    /*print_stack(s->a, s->b);
-    printf("\n");
-    getchar();*/
     flag = s->size;
     quater_a_to_b(s); //перекинуть последнюю четверть
     s->top = s->size;
@@ -151,12 +149,12 @@ void    half_sort(t_massive *s)
         if(s->a->index <= s->middle)
         {
             push_b(s);
-            ft_printf("pb\n");
+            s->message = ft_strjoin_f(s->message, "pb\n", 1);
         }
         else
         {
             s->a = rotate_a_b(s->a);
-            ft_printf("ra\n");
+            s->message = ft_strjoin_f(s->message, "ra\n", 1);
         }
         flag++;        
     }
@@ -169,7 +167,7 @@ void    half_sort(t_massive *s)
         else
         {
             push_b(s);
-            ft_printf("pb\n");
+            s->message = ft_strjoin_f(s->message, "pb\n", 1);
         }
     }
     sort(s); //отсортировать вторую половину б
