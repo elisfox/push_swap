@@ -99,7 +99,6 @@ static void half_b_to_a(t_massive *s)
 void    max_sort(t_massive *s)
 {
     int flag;
-    int quarter; 
 
     flag = 1;
     s->middle = s->size / 2;
@@ -108,7 +107,6 @@ void    max_sort(t_massive *s)
     printf("\n");
     getchar();
     flag = s->middle;
-    quarter = s->middle /= 2;
     printf("flag1 = %d\n", flag);
     while (flag--)
         half_b_to_a(s); //перекинуть четверть обратно
@@ -155,6 +153,18 @@ void    max_sort(t_massive *s)
     printf("flag = %d\n", flag);
     quater_a_to_b(s, flag); //перекинуть третью 1/8
     sort(s); // отсортировали половину
+    flag = s->size - s->bottom + 1;
+    s->middle = s->size;
+    half_a_to_b(s, flag); //перекинуть вторую половину в б
+    flag = s->size - s->bottom;
+    printf("flag = %d\n", flag);
+    s->middle =flag / 2 + flag;
+    printf("s->middle = %d\n", s->middle);
+    while (flag--)
+        half_b_to_a(s);//перекинуть 1/8 обратно
+    sort(s);
+
+
 
     
 
