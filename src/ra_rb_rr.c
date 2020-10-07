@@ -9,10 +9,12 @@ t_stack *rotate_a_b(t_stack *stack)
         return (stack);
     first = stack;
     head = stack->next;
+    head->prev = NULL;
     while (stack->next != NULL)
         stack = stack->next;
     stack->next = first;
-    first->next = NULL;
+    first->next = NULL;    
+    first->prev = stack;
     return(head);
 }
 
@@ -26,22 +28,23 @@ t_stack *rr_a_b(t_stack *stack)
 {
     t_stack *last;
     t_stack *first;
-    t_stack *prev;
+    t_stack *tmp;
 
     first = stack;
-    prev = first;
+    tmp = first;
     if (!stack)
         return (stack);
     if (!stack->next)
         return (stack);
     while (stack->next != NULL)
     {
-        prev = stack;
+        tmp = stack;
         stack = stack->next;
     }
     last = stack;
     last->next = first;
-    prev->next = NULL;
+    first->prev = last;
+    tmp->next = NULL;
     return (last);
 }
 

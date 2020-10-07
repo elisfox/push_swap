@@ -24,6 +24,7 @@ typedef struct		s_stack
 	int				val;
 	int				index;
 	struct s_stack	*next;
+	struct s_stack	*prev;
 }					t_stack;
 
 typedef struct		s_massive

@@ -128,6 +128,7 @@ t_stack *add_elem(t_stack *first, int i)
         exit_error();
     first->next = new;
     new->val = i;
+    new->prev = first;
     return(new);    
 }
 
@@ -157,6 +158,7 @@ void init_stack_a(t_massive *s, char **av, int ac)
     if(!(s->a = (t_stack *)ft_memalloc(sizeof(t_stack))))
         exit_error();
     head = s->a;
+    s->a->prev = NULL;
     s->a->val = s->tab[i++];
     while(i < s->size)
         s->a = add_elem(s->a, s->tab[i++]);
