@@ -13,8 +13,8 @@ int			main(int ac, char **av)
         s->bottom = 0;
         s->top = s->size / 2 + 1;
         s->message = ft_strdup("");
-        
-        sorting_algorithm(s);
+        new_sort(s);
+       //sorting_algorithm(s);
         //print_stacks(s);
         /*printf("s->a\n");
         print_stack(s->a);

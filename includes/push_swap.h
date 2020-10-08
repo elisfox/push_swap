@@ -62,5 +62,6 @@ void    read_instructions(t_massive *s);
 long long	ft_atoi_ps(const char *str);
 void    sorting_algorithm(t_massive *s);
 void    max_sort(t_massive *s);
+void	new_sort(t_massive *s);
 
 #endif
