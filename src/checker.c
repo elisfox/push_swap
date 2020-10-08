@@ -10,12 +10,7 @@ int main(int ac, char **av)
     {
         init_stack_a(s, av, ac);
         s->b = NULL;
-        s->a = rr_a_b(s->a);
-        print_stack(s->a, s->b);
-        //s->a = rotate_a_b(s->a);
-        s->a = rr_a_b(s->a);
-        print_stack(s->a, s->b);
-        //read_instructions(s);
+        read_instructions(s);
     }
     return(0);
 }
