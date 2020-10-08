@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-void    push_first(t_massive *s, int count_first)
+void    first_up(t_massive *s, int count_first)
 {
     while (count_first)
     {
@@ -8,11 +8,11 @@ void    push_first(t_massive *s, int count_first)
         s->message = ft_strjoin_f(s->message, "ra\n", 1);
         count_first--;
     }
-    push_b(s);
-    s->message = ft_strjoin_f(s->message, "pb\n", 1);
+    //push_b(s);
+    //s->message = ft_strjoin_f(s->message, "pb\n", 1);
 }
 
-void    push_second(t_massive *s, int count_second)
+void    second_up(t_massive *s, int count_second)
 {
     while (count_second)
     {
@@ -22,8 +22,58 @@ void    push_second(t_massive *s, int count_second)
     }
     s->a = rr_a_b(s->a);
     s->message = ft_strjoin_f(s->message, "rra\n", 1);
-    push_b(s);
-    s->message = ft_strjoin_f(s->message, "pb\n", 1);
+    //push_b(s);
+    //s->message = ft_strjoin_f(s->message, "pb\n", 1);
+}
+
+void    push_to_b(t_massive *s)
+{
+    t_stack *tmp;
+    t_stack *tmp_low;
+    t_stack *tmp_high;
+    int count_low;
+    int count_high;
+
+    tmp = s->b;
+    if (tmp == NULL)
+    {
+        push_b(s);
+        s->message = ft_strjoin_f(s->message, "pb\n", 1);
+    }
+    else if (tmp->next == NULL)
+    {
+        if(s->a->index < tmp_low->index)
+        {
+            push_b(s);
+            s->message = ft_strjoin_f(s->message, "pb\n", 1);
+        }    
+        else
+        {
+            push_b(s);
+            s->message = ft_strjoin_f(s->message, "pb\n", 1);
+            s->b = rotate_a_b(s->b);
+            s->message = ft_strjoin_f(s->message, "rb\n", 1);
+        }   
+    }
+    else
+    {    
+        while(s->a->index > tmp)
+        {
+            tmp = tmp->next;
+            count_low++;
+        }
+        //tmp_high = tmp;
+        while(tmp->next != NULL)
+            tmp = tmp->next;
+        while(s->a->index < tmp)
+        {
+            tmp = tmp->prev;
+            count_high++;
+        }
+        if(count_low <= count_high)
+    
+
+
 }
 
 void    five_sort(t_massive *s, int size_chunk)
@@ -57,9 +107,11 @@ void    five_sort(t_massive *s, int size_chunk)
     second = tmp;
     printf("second = %d\n", second->index);
     if(count_first <= count_second)
-        push_first(s, count_first);
+        first_up(s, count_first);
     else
-        push_second(s, count_second);
+        second_up(s, count_second);
+    push_to_b(s);
+    
     print_stack(s->a,s->b);
 }
 
