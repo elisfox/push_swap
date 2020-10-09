@@ -45,14 +45,18 @@ void    second_b_up(t_massive *s, int count_second)
 }
 
 
-void    push_to_b(t_massive *s)
+void    push_to_b(t_massive *s, int size_chunk)
 {
     t_stack *tmp;
     int count_first;
     int count_second;
     int max_less;
+    int max;
+    int min;
 
     tmp = s->b;
+    max = 0;
+    min = size_chunk;
     max_less = 0;
     count_first = 0;
     count_second = 0;
@@ -81,14 +85,18 @@ void    push_to_b(t_massive *s)
         printf("s->a->index = %d\n", s->a->index);
         while (tmp)
         {
+            min = ((tmp->index < min)? tmp->index : min);
+            max = ((tmp->index > max)? tmp->index : max);
             max_less = ((tmp->index > max_less && s->a->index > tmp->index)? tmp->index : max_less);
             tmp = tmp->next;
         }
         printf("max_less = %d\n", max_less);
-
+        printf("max = %d\n", max);
+        printf("min = %d\n", min);
+        if (s->a->index < min)
+            max_less = max;
         if (max_less != 0)
         {
-            
             tmp = s->b;
             while (tmp->index != max_less)
             {
@@ -152,7 +160,7 @@ void    five_sort(t_massive *s, int size_chunk)
         first_up(s, count_first);
     else
         second_up(s, count_second);
-    push_to_b(s);
+    push_to_b(s, size_chunk);
     
     print_stack(s->a,s->b);
 }
@@ -203,7 +211,7 @@ void    new_sort(t_massive *s)
     printf("!\n");
     if (s->size >= 40)
     {
-        size_chunk = s->size / 4;
+        size_chunk = s->size / 5;
         printf("size_chunk = %d\n", size_chunk);
         while(count < size_chunk)
         {
