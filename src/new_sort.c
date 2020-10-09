@@ -12,6 +12,18 @@ void    first_up(t_massive *s, int count_first)
     //s->message = ft_strjoin_f(s->message, "pb\n", 1);
 }
 
+void    first_b_up(t_massive *s, int count_low)
+{
+    while (count_low)
+    {
+        s->b = rotate_a_b(s->b);
+        s->message = ft_strjoin_f(s->message, "rb\n", 1);
+        count_low--;
+    }
+}
+
+
+
 void    second_up(t_massive *s, int count_second)
 {
     while (count_second)
@@ -26,15 +38,29 @@ void    second_up(t_massive *s, int count_second)
     //s->message = ft_strjoin_f(s->message, "pb\n", 1);
 }
 
+void    second_b_up(t_massive *s, int count_high)
+{
+    while (count_high)
+    {
+        s->a = rr_a_b(s->a);
+        s->message = ft_strjoin_f(s->message, "rra\n", 1);
+        count_high--;    
+    }
+    s->a = rr_a_b(s->a);
+    s->message = ft_strjoin_f(s->message, "rra\n", 1);
+}
+
+
 void    push_to_b(t_massive *s)
 {
     t_stack *tmp;
-    t_stack *tmp_low;
-    t_stack *tmp_high;
+    int count;
     int count_low;
     int count_high;
 
     tmp = s->b;
+    count_low = 0;
+    count_high = 0;
     if (tmp == NULL)
     {
         push_b(s);
@@ -42,7 +68,7 @@ void    push_to_b(t_massive *s)
     }
     else if (tmp->next == NULL)
     {
-        if(s->a->index < tmp_low->index)
+        if(s->a->index > tmp->index)
         {
             push_b(s);
             s->message = ft_strjoin_f(s->message, "pb\n", 1);
@@ -57,23 +83,32 @@ void    push_to_b(t_massive *s)
     }
     else
     {    
-        while(s->a->index > tmp)
+        while(s->a->index < tmp->index)
         {
             tmp = tmp->next;
             count_low++;
         }
-        //tmp_high = tmp;
+        count = count_low;
+        
         while(tmp->next != NULL)
             tmp = tmp->next;
-        while(s->a->index < tmp)
+        
+        while(s->a->index > tmp->index && tmp->prev)
         {
             tmp = tmp->prev;
             count_high++;
         }
-        if(count_low <= count_high)
-    
-
-
+        printf("!\n");
+        if (count_low <= count_high)
+            first_b_up(s, count_low);
+        else
+            second_b_up(s, count_high);
+        push_b(s);
+        if (count_low <= count_high)
+            second_b_up(s, count_low);
+        else
+            first_b_up(s, count_high);
+    }
 }
 
 void    five_sort(t_massive *s, int size_chunk)
@@ -161,7 +196,8 @@ void    new_sort(t_massive *s)
     printf("!\n");
     if (s->size >= 100)
     {
-        size_chunk = s->size / 5;
+        //size_chunk = s->size / 5;
+        size_chunk = 5;
         printf("size_chunk = %d\n", size_chunk);
         while(count < size_chunk)
         {
