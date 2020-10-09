@@ -231,7 +231,9 @@ void    new_sort(t_massive *s)
 {
     int size_chunk;
     int count;
+    int i;
     
+    i = 1;
     size_chunk = s->size;
     count = 0;
     printf("!\n");
@@ -239,10 +241,16 @@ void    new_sort(t_massive *s)
     {
         size_chunk = s->size / 5;
         printf("size_chunk = %d\n", size_chunk);
-        while(count < size_chunk)
+        while (i <= 4)
         {
-            five_sort(s, size_chunk);
-            count++;
+            count = 0;
+            size_chunk += size_chunk;
+            while(count < size_chunk)
+            {
+                five_sort(s, size_chunk);
+                count++;
+            }
+            i++;
         }
         correct_order(s, size_chunk);
         print_stack(s->a,s->b);
