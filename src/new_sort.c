@@ -165,6 +165,32 @@ void    five_sort(t_massive *s, int size_chunk)
     print_stack(s->a,s->b);
 }
 
+void    correct_order(t_massive *s, int size_chunk)
+{
+    int count_first;
+    int count_second;
+    t_stack *tmp;
+    
+    count_first = 0;
+    count_second = 0;
+    tmp = s->b;
+    while (tmp->index != size_chunk)
+    {
+        tmp = tmp->next;
+        count_first++;
+    }
+    while(tmp->next != NULL)
+        tmp = tmp->next;
+    while (tmp->index != size_chunk)
+    {
+        tmp = tmp->prev;
+        count_second++;
+    }
+    if (count_first <= count_second)
+        first_b_up(s, count_first);
+    else
+        second_b_up(s, count_second);
+}
 /*static void ft_clearstr_stack(t_massive *s)
 {
     char *ptr;
@@ -218,7 +244,8 @@ void    new_sort(t_massive *s)
             five_sort(s, size_chunk);
             count++;
         }
-        //print_stack(s->a,s->b);
+        correct_order(s, size_chunk);
+        print_stack(s->a,s->b);
     }
     //ft_clearstr_stack(s);
     //ft_printf("%s", s->message);
