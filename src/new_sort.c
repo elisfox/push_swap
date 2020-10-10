@@ -38,10 +38,12 @@ void    second_b_up(t_massive *s, int count_second)
     {
         s->b = rr_a_b(s->b);
         s->message = ft_strjoin_f(s->message, "rrb\n", 1);
-        count_second--;    
+        count_second--;
+            
     }
     s->b = rr_a_b(s->b);
     s->message = ft_strjoin_f(s->message, "rrb\n", 1);
+    //print_stack(s->a, s->b);
 }
 
 
@@ -117,6 +119,7 @@ void    push_to_b(t_massive *s, int size_chunk)
             else
                 second_b_up(s, count_second);
             push_b(s);
+            printf("!\n");
             s->message = ft_strjoin_f(s->message, "pb\n", 1);
         }
         else
@@ -161,8 +164,9 @@ void    five_sort(t_massive *s, int size_chunk)
     else
         second_up(s, count_second);
     push_to_b(s, size_chunk);
+    printf("????\n");
     
-    print_stack(s->a,s->b);
+    //print_stack(s->a,s->b);
 }
 
 void    correct_order(t_massive *s, int size_chunk)
@@ -174,22 +178,26 @@ void    correct_order(t_massive *s, int size_chunk)
     count_first = 0;
     count_second = 0;
     tmp = s->b;
-    while (tmp->index != size_chunk)
+    //printf("size_chunk = %d", size_chunk);
+    if (tmp->index != size_chunk)
     {
-        tmp = tmp->next;
-        count_first++;
+        while (tmp->index != size_chunk)
+        {
+            tmp = tmp->next;
+            count_first++;
+        }
+        while(tmp->next != NULL)
+            tmp = tmp->next;
+        while (tmp->index != size_chunk)
+        {
+            tmp = tmp->prev;
+            count_second++;
+        }
+        if (count_first <= count_second)
+            first_b_up(s, count_first);
+        else
+            second_b_up(s, count_second);
     }
-    while(tmp->next != NULL)
-        tmp = tmp->next;
-    while (tmp->index != size_chunk)
-    {
-        tmp = tmp->prev;
-        count_second++;
-    }
-    if (count_first <= count_second)
-        first_b_up(s, count_first);
-    else
-        second_b_up(s, count_second);
 }
 /*static void ft_clearstr_stack(t_massive *s)
 {
@@ -241,18 +249,32 @@ void    new_sort(t_massive *s)
     {
         size_chunk = s->size / 5;
         printf("size_chunk = %d\n", size_chunk);
-        while (i <= 4)
+        while (i <= 5)
         {
-            count = 0;
-            size_chunk += size_chunk;
+            //count = 0;
+            
+            printf("size_chunk = %d\n", size_chunk);
+            printf("count = %d\n", count);
+            getchar();
             while(count < size_chunk)
             {
                 five_sort(s, size_chunk);
                 count++;
             }
             i++;
+            if (i == 5)
+            {
+                size_chunk = s->size;
+            }
+            if (i < 5)
+                size_chunk += s->size / 5;
+            print_stack(s->a,s->b);
+            getchar();
         }
+        
         correct_order(s, size_chunk);
+        while (s->b)
+            push_a(s);
         print_stack(s->a,s->b);
     }
     //ft_clearstr_stack(s);
