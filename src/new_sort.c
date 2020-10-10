@@ -1,5 +1,17 @@
 #include "push_swap.h"
 
+void    pb_and_print(t_massive *s)
+{
+    push_b(s);
+    s->message = ft_strjoin_f(s->message, "pb\n", 1);
+}
+
+void    pa_and_print(t_massive *s)
+{
+    push_a(s);
+    s->message = ft_strjoin_f(s->message, "pa\n", 1);
+}
+
 void    first_up(t_massive *s, int count_first)
 {
     while (count_first)
@@ -43,15 +55,39 @@ void    second_b_up(t_massive *s, int count_second)
     }
     s->b = rr_a_b(s->b);
     s->message = ft_strjoin_f(s->message, "rrb\n", 1);
-    //print_stack(s->a, s->b);
 }
 
-
-void    push_to_b(t_massive *s, int size_chunk)
+void    smallest_turn(t_massive *s, int max_less)
 {
     t_stack *tmp;
     int count_first;
     int count_second;
+
+    count_first = 0;
+    count_second = 0;
+    tmp = s->b;
+    while (tmp->index != max_less)
+    {
+        tmp = tmp->next;
+        count_first++;
+    }
+    while(tmp->next != NULL)
+        tmp = tmp->next;
+    while (tmp->index != max_less)
+    {
+        tmp = tmp->prev;
+        count_second++;
+    }
+    if (count_first <= count_second)
+        first_b_up(s, count_first);
+    else
+        second_b_up(s, count_second);
+    pb_and_print(s);
+}
+
+void    not_first_elem(t_massive *s, int size_chunk)
+{
+    t_stack *tmp;
     int max_less;
     int max;
     int min;
@@ -60,73 +96,41 @@ void    push_to_b(t_massive *s, int size_chunk)
     max = 0;
     min = size_chunk;
     max_less = 0;
-    count_first = 0;
-    count_second = 0;
-    if (tmp == NULL)
+    while (tmp)
     {
-        push_b(s);
-        s->message = ft_strjoin_f(s->message, "pb\n", 1);
+        min = ((tmp->index < min)? tmp->index : min);
+        max = ((tmp->index > max)? tmp->index : max);
+        max_less = ((tmp->index > max_less && s->a->index > tmp->index)? tmp->index : max_less);
+        tmp = tmp->next;
     }
+    if (s->a->index < min)
+        max_less = max;
+    if (max_less != 0)
+        smallest_turn(s, max_less);
+    else
+        pb_and_print(s);
+}
+
+void    push_to_b(t_massive *s, int size_chunk)
+{
+    t_stack *tmp;
+
+    tmp = s->b;
+    if (tmp == NULL)
+        pb_and_print(s);
     else if (tmp->next == NULL)
     {
         if(s->a->index > tmp->index)
-        {
-            push_b(s);
-            s->message = ft_strjoin_f(s->message, "pb\n", 1);
-        }    
+            pb_and_print(s);   
         else
         {
-            push_b(s);
-            s->message = ft_strjoin_f(s->message, "pb\n", 1);
+            pb_and_print(s);
             s->b = rotate_a_b(s->b);
             s->message = ft_strjoin_f(s->message, "rb\n", 1);
         }   
     }
     else
-    {
-        //printf("s->a->index = %d\n", s->a->index);
-        while (tmp)
-        {
-            min = ((tmp->index < min)? tmp->index : min);
-            max = ((tmp->index > max)? tmp->index : max);
-            max_less = ((tmp->index > max_less && s->a->index > tmp->index)? tmp->index : max_less);
-            tmp = tmp->next;
-        }
-        //printf("max_less = %d\n", max_less);
-        //printf("max = %d\n", max);
-        //printf("min = %d\n", min);
-        if (s->a->index < min)
-            max_less = max;
-        if (max_less != 0)
-        {
-            tmp = s->b;
-            while (tmp->index != max_less)
-            {
-                tmp = tmp->next;
-                count_first++;
-            }
-            //printf("count_first = %d\n", count_first);
-            while(tmp->next != NULL)
-                tmp = tmp->next;
-            while (tmp->index != max_less)
-            {
-                tmp = tmp->prev;
-                count_second++;
-            }
-            //printf("count_second = %d\n", count_second);
-            if (count_first <= count_second)
-                first_b_up(s, count_first);
-            else
-                second_b_up(s, count_second);
-            push_b(s);
-            s->message = ft_strjoin_f(s->message, "pb\n", 1);
-        }
-        else
-        {
-            push_b(s);
-            s->message = ft_strjoin_f(s->message, "pb\n", 1);
-        }
-    }
+        not_first_elem(s, size_chunk);
 }
 
 void    five_sort(t_massive *s, int size_chunk)
@@ -145,9 +149,7 @@ void    five_sort(t_massive *s, int size_chunk)
         tmp = tmp->next;
         count_first++;
     }
-    //printf("count_first = %d\n", count_first);
     first = tmp;
-    //printf("first = %d\n", first->index);
     while(tmp->next != NULL)
         tmp = tmp->next;
     while(tmp->index > size_chunk)
@@ -155,16 +157,12 @@ void    five_sort(t_massive *s, int size_chunk)
         tmp = tmp->prev;
         count_second++;
     }
-    //printf("count_second = %d\n", count_second);
     second = tmp;
-    //printf("second = %d\n", second->index);
     if(count_first <= count_second)
         first_up(s, count_first);
     else
         second_up(s, count_second);
     push_to_b(s, size_chunk);
-    
-    //print_stack(s->a,s->b);
 }
 
 void    correct_order(t_massive *s, int size_chunk)
@@ -176,7 +174,6 @@ void    correct_order(t_massive *s, int size_chunk)
     count_first = 0;
     count_second = 0;
     tmp = s->b;
-    //printf("size_chunk = %d", size_chunk);
     if (tmp->index != size_chunk)
     {
         while (tmp->index != size_chunk)
@@ -196,41 +193,8 @@ void    correct_order(t_massive *s, int size_chunk)
         else
             second_b_up(s, count_second);
     }
-}
-static void ft_clearstr_stack(t_massive *s)
-{
-    char *ptr;
-
-    ptr = s->message;
- //char *str;
-    while (*ptr != '\0')
-    {
-        if (ft_strncmp(ptr, "pa\npb\n", 6) == 0)
-        {
-            ft_strcpy(ptr, (ptr + 6));
-            ptr = s->message;
-        }
-        else if (ft_strncmp(ptr, "pb\npa\n", 6) == 0)
-        {
-            ft_strcpy(ptr, (ptr + 6));
-            ptr = s->message;
-        }
-        else if (ft_strncmp(ptr, "\nrb\nrrb", 7) == 0)
-        {
-            ft_strcpy(ptr, (ptr + 7));
-            ptr = s->message;
-        }
-        /*else if (ft_strncmp(ptr, "ra\nrb\n", 4) == 0)
-        {
-            str = ft_strdup(ptr + 6);
-            ft_strcpy(ptr, "rr\n");
-            ptr = s->message;
-            ptr = ft_strjoin_f(ptr, str, 1);
-            s->message = ptr;
-        }*/
-        else
-            ptr++;
-    }
+    while (s->b)
+        pa_and_print(s);
 }
 
 void    new_sort(t_massive *s)
@@ -247,14 +211,8 @@ void    new_sort(t_massive *s)
     if (s->size >= 40)
     {
         size_chunk = s->size / max_i;
-        //printf("size_chunk = %d\n", size_chunk);
         while (i <= max_i)
         {
-            //count = 0;
-            
-            //printf("size_chunk = %d\n", size_chunk);
-            //printf("count = %d\n", count);
-            //getchar();
             while(count < size_chunk)
             {
                 five_sort(s, size_chunk);
@@ -267,16 +225,9 @@ void    new_sort(t_massive *s)
             }
             if (i < max_i)
                 size_chunk += s->size / max_i;
-            //print_stack(s->a,s->b);
-            //getchar();
         }
-        
         correct_order(s, size_chunk);
-        while (s->b)
-            push_a(s);
-        //print_stack(s->a,s->b);
     }
-    ft_clearstr_stack(s);
     ft_printf("%s", s->message);
 	free(s->message);
 }

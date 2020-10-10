@@ -102,6 +102,7 @@ void    read_instructions(t_massive *s)
         }
 		make_instr(s, instr);
 		free(line);
+		//print_stack(s->a, s->b);
     }
 	check_sort_stacks(s);
 }
