@@ -1,6 +1,5 @@
 #include "push_swap.h"
 
-
 void	make_instr(t_massive *s, t_instr *instr)
 {
 	if (instr->comm == SA)
@@ -26,7 +25,6 @@ void	make_instr(t_massive *s, t_instr *instr)
 	else if (instr->comm == RRR)
 		rrr(s->a, s->b);	
 }
-
 
 static int check_instr(char *line, t_instr *instr)
 {
@@ -54,8 +52,7 @@ static int check_instr(char *line, t_instr *instr)
 		instr->comm = RRR;
     else
         return (0);
-    return(1);
-    
+    return(1);    
 }
 
 void check_sort_stacks(t_massive *s)

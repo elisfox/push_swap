@@ -72,5 +72,6 @@ void	first_b_up(t_massive *s, int count_first);
 void	second_up(t_massive *s, int count_second);
 void	second_b_up(t_massive *s, int count_second);
 void	push_to_b(t_massive *s, int size_chunk);
+void	not_first_elem(t_massive *s, int size_chunk);
 
 #endif
