@@ -62,6 +62,15 @@ void    read_instructions(t_massive *s);
 long long	ft_atoi_ps(const char *str);
 void    sorting_algorithm(t_massive *s);
 void    max_sort(t_massive *s);
-void	new_sort(t_massive *s);
+void	new_sort(t_massive *s, int max_i);
+void	pb_and_print(t_massive *s);
+void	pa_and_print(t_massive *s);
+void	second_or_first_up(t_massive *s, int count_first, int count_second);
+void	second_or_first_b_up(t_massive *s, int count_first, int count_second);
+void	first_up(t_massive *s, int count_first);
+void	first_b_up(t_massive *s, int count_first);
+void	second_up(t_massive *s, int count_second);
+void	second_b_up(t_massive *s, int count_second);
+void	push_to_b(t_massive *s, int size_chunk);
 
 #endif

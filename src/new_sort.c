@@ -12,62 +12,6 @@
 
 #include "push_swap.h"
 
-void	pb_and_print(t_massive *s)
-{
-	push_b(s);
-	s->message = ft_strjoin_f(s->message, "pb\n", 1);
-}
-
-void	pa_and_print(t_massive *s)
-{
-	push_a(s);
-	s->message = ft_strjoin_f(s->message, "pa\n", 1);
-}
-
-void	first_up(t_massive *s, int count_first)
-{
-	while (count_first)
-	{
-		s->a = rotate_a_b(s->a);
-		s->message = ft_strjoin_f(s->message, "ra\n", 1);
-		count_first--;
-	}
-}
-
-void	first_b_up(t_massive *s, int count_first)
-{
-	while (count_first)
-	{
-		s->b = rotate_a_b(s->b);
-		s->message = ft_strjoin_f(s->message, "rb\n", 1);
-		count_first--;
-	}
-}
-
-void	second_up(t_massive *s, int count_second)
-{
-	while (count_second)
-	{
-		s->a = rr_a_b(s->a);
-		s->message = ft_strjoin_f(s->message, "rra\n", 1);
-		count_second--;
-	}
-	s->a = rr_a_b(s->a);
-	s->message = ft_strjoin_f(s->message, "rra\n", 1);
-}
-
-void	second_b_up(t_massive *s, int count_second)
-{
-	while (count_second)
-	{
-		s->b = rr_a_b(s->b);
-		s->message = ft_strjoin_f(s->message, "rrb\n", 1);
-		count_second--;
-	}
-	s->b = rr_a_b(s->b);
-	s->message = ft_strjoin_f(s->message, "rrb\n", 1);
-}
-
 void	smallest_turn(t_massive *s, int max_less)
 {
 	t_stack *tmp;
@@ -123,28 +67,6 @@ void	not_first_elem(t_massive *s, int size_chunk)
 		pb_and_print(s);
 }
 
-void	push_to_b(t_massive *s, int size_chunk)
-{
-	t_stack *tmp;
-
-	tmp = s->b;
-	if (tmp == NULL)
-		pb_and_print(s);
-	else if (tmp->next == NULL)
-	{
-		if (s->a->index > tmp->index)
-			pb_and_print(s);
-		else
-		{
-			pb_and_print(s);
-			s->b = rotate_a_b(s->b);
-			s->message = ft_strjoin_f(s->message, "rb\n", 1);
-		}
-	}
-	else
-		not_first_elem(s, size_chunk);
-}
-
 void	five_sort(t_massive *s, int size_chunk)
 {
 	int		count_first;
@@ -170,10 +92,7 @@ void	five_sort(t_massive *s, int size_chunk)
 		count_second++;
 	}
 	second = tmp;
-	if (count_first <= count_second)
-		first_up(s, count_first);
-	else
-		second_up(s, count_second);
+	second_or_first_up(s, count_first, count_second);
 	push_to_b(s, size_chunk);
 }
 
@@ -200,24 +119,19 @@ void	correct_order(t_massive *s, int size_chunk)
 			tmp = tmp->prev;
 			count_second++;
 		}
-		if (count_first <= count_second)
-			first_b_up(s, count_first);
-		else
-			second_b_up(s, count_second);
+		second_or_first_b_up(s, count_first, count_second);
 	}
 	while (s->b)
 		pa_and_print(s);
 }
 
-void	new_sort(t_massive *s)
+void	new_sort(t_massive *s, int max_i)
 {
 	int size_chunk;
 	int count;
 	int i;
-	int max_i;
 
 	i = 1;
-	max_i = (s->size > 100 ? 11 : 5);
 	size_chunk = s->size;
 	count = 0;
 	if (s->size >= 40)
@@ -238,6 +152,4 @@ void	new_sort(t_massive *s)
 		}
 		correct_order(s, size_chunk);
 	}
-	ft_printf("%s", s->message);
-	free(s->message);
 }
