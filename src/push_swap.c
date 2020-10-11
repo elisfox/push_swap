@@ -25,7 +25,10 @@ int	main(int ac, char **av)
 		s->b = NULL;
 		s->message = ft_strdup("");
 		max_i = (s->size > 100 ? 11 : 5);
-		new_sort(s, max_i);
+		if(s->size <= 10)
+			small_sort(s);
+		else
+			new_sort(s, max_i);
 		ft_printf("%s", s->message);
 		free(s->message);
 	}
