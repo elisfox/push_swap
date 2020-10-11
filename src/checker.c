@@ -24,5 +24,6 @@ int	main(int ac, char **av)
 		s->b = NULL;
 		read_instructions(s);
 	}
+	free(s);
 	return (0);
 }

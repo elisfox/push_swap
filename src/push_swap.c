@@ -6,7 +6,7 @@
 /*   By: jojoseph <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 14:54:55 by jojoseph          #+#    #+#             */
-/*   Updated: 2020/10/11 14:55:51 by jojoseph         ###   ########.fr       */
+/*   Updated: 2020/10/11 15:48:27 by jojoseph         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,5 @@ int	main(int ac, char **av)
 		ft_printf("%s", s->message);
 		free(s->message);
 	}
+	free(s);
 }

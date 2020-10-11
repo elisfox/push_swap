@@ -17,6 +17,8 @@ void	push_b(t_massive *s)
 	t_stack *tmp;
 
 	tmp = s->a;
+	if (tmp == NULL)
+		return ;
 	if (s->a->next)
 	{
 		s->a = s->a->next;
@@ -24,9 +26,7 @@ void	push_b(t_massive *s)
 	}
 	else
 		s->a = NULL;
-	if (tmp == NULL)
-		return ;
-	else if (s->b == NULL)
+	if (s->b == NULL)
 	{
 		s->b = tmp;
 		s->b->prev = NULL;
@@ -45,6 +45,8 @@ void	push_a(t_massive *s)
 	t_stack *tmp;
 
 	tmp = s->b;
+	if (tmp == NULL)
+		return ;
 	if (s->b->next)
 	{
 		s->b = s->b->next;
@@ -52,9 +54,7 @@ void	push_a(t_massive *s)
 	}
 	else
 		s->b = NULL;
-	if (tmp == NULL)
-		return ;
-	else if (s->a == NULL)
+	if (s->a == NULL)
 	{
 		s->a = tmp;
 		s->a->prev = NULL;
