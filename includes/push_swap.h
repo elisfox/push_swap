@@ -77,5 +77,6 @@ int		*create_array(int count, char ***args);
 char	***extract_numbers(int ac, char **av);
 int		count_numbers(char ***args);
 void	small_sort(t_massive *s);
+void	five_sort(t_massive *s, int size_chunk);
 
 #endif
