@@ -60,8 +60,6 @@ void push_b(t_massive *s);
 void print_stack(t_stack *a, t_stack *b);
 void    read_instructions(t_massive *s);
 long long	ft_atoi_ps(const char *str);
-void    sorting_algorithm(t_massive *s);
-void    max_sort(t_massive *s);
 void	new_sort(t_massive *s, int max_i);
 void	pb_and_print(t_massive *s);
 void	pa_and_print(t_massive *s);
@@ -73,5 +71,10 @@ void	second_up(t_massive *s, int count_second);
 void	second_b_up(t_massive *s, int count_second);
 void	push_to_b(t_massive *s, int size_chunk);
 void	not_first_elem(t_massive *s, int size_chunk);
+void	check_doubles(int *tab, int size);
+void	check_numbers(int ac, char **av);
+int		*create_array(int count, char ***args);
+char	***extract_numbers(int ac, char **av);
+int		count_numbers(char ***args);
 
 #endif

@@ -31,12 +31,11 @@ SRCS_NAME = pa_pb.c \
             sa_sb_ss.c \
             selection_sort.c \
 			help_functions.c \
-			sorting_algorithm.c \
 			init_stack.c \
-			max_sorting.c \
 			new_sort.c \
 			push_for_sort.c \
-			push_for_sort2.c
+			push_for_sort2.c \
+			valid.c
 
 SRCS_CHECKER = checker.c $(SRCS_NAME)
 

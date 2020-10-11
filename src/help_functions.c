@@ -6,7 +6,7 @@
 /*   By: jojoseph <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/10 21:16:02 by jojoseph          #+#    #+#             */
-/*   Updated: 2020/10/10 21:22:29 by jojoseph         ###   ########.fr       */
+/*   Updated: 2020/10/11 14:50:26 by jojoseph         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void		exit_error(void)
 	exit(1);
 }
 
-long long		ft_atoi_ps(const char *str)
+long long	ft_atoi_ps(const char *str)
 {
 	int			nv;
 	long long	nb;
