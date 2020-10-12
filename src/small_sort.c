@@ -6,15 +6,21 @@
 /*   By: jojoseph <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/11 14:10:45 by jojoseph          #+#    #+#             */
-/*   Updated: 2020/10/11 14:40:19 by jojoseph         ###   ########.fr       */
+/*   Updated: 2020/10/12 20:17:26 by jojoseph         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+void	sa_and_print(t_massive *s)
+{
+	swap_a_b(s->a);
+	s->message = ft_strjoin_f(s->message, "sa\n", 1);
+}
+
 static void	first_smallest(t_massive *s)
 {
-	if(s->a->index < s->a->next->next->index)
+	if (s->a->index < s->a->next->next->index)
 	{
 		swap_a_b(s->a);
 		s->message = ft_strjoin_f(s->message, "sa\n", 1);
@@ -30,7 +36,7 @@ static void	first_smallest(t_massive *s)
 
 static void	first_not_smallest(t_massive *s)
 {
-	if(s->a->next->index < s->a->next->next->index)
+	if (s->a->next->index < s->a->next->next->index)
 	{
 		if (s->a->index < s->a->next->next->index)
 		{
@@ -85,7 +91,7 @@ void	smallest_way(t_massive *s, int min_max)
 		first_up(s, count_first);
 	else
 		second_up(s, count_second);
-	pa_and_print(s);	
+	pa_and_print(s);
 }
 
 void	algo(t_massive *s)
@@ -104,31 +110,18 @@ void	algo(t_massive *s)
 		min = ((tmp->index < min) ? tmp->index : min);
 		max = ((tmp->index > max) ? tmp->index : max);
 		min_max = ((tmp->index < min_max && s->b->index < tmp->index) ? \
-		tmp->index : min_max);
+				tmp->index : min_max);
 		tmp = tmp->next;
-		//printf("min_max = %d\n", min_max);
-		//printf("max = %d\n", max);
 	}
-
-	//printf("min_max = %d\n", min_max);
-	if (min_max != s->size && s->b->index > max) //|| min_max == s->size)
+	if (min_max != s->size && s->b->index > max)
 		pa_and_print(s);
 	else
 	{
-	
 		if (min_max == s->size && s->b->index >= max)
 			min_max = min;
-	
-	
-		if (min_max) //!= s->b->index) //!= s->size)
+		if (min_max)
 			smallest_way(s, min_max);
 	}
-	
-	/*else if (min_max == s->size)
-	{
-		min_max = 1;
-		smallest_way(s, min_max);
-	}*/
 }
 
 void	small_sort(t_massive *s)
@@ -139,10 +132,7 @@ void	small_sort(t_massive *s)
 	if (s->size < 3)
 	{
 		if (s->a->index != 1)
-		{
-			swap_a_b(s->a);
-			s->message = ft_strjoin_f(s->message, "sa\n", 1);
-		}
+			sa_and_print(s);
 	}
 	else
 	{
@@ -152,15 +142,12 @@ void	small_sort(t_massive *s)
 			count++;
 		}
 		three_sort(s);
-		//print_stack(s->a, s->b);
 		count = 0;
 		while (count < s->size - 3)
 		{
 			algo(s);
 			count++;
-			//print_stack(s->a, s->b);
 		}
 		correct_order(s, 1);
 	}
-	//print_stack(s->a, s->b);
 }
