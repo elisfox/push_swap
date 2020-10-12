@@ -77,8 +77,8 @@ int		*create_array(int count, char ***args)
 		while (args[i][j])
 		{
 			tab[count] = (int)(ft_atoi_ps(args[i][j]));
-			if (ft_strcmp(args[i][j], ft_itoa(tab[count])) != 0)
-				exit_error();
+			//if (ft_strcmp(args[i][j], ft_itoa(tab[count])) != 0)
+				//exit_error();
 			j++;
 			count++;
 		}

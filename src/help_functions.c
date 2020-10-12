@@ -103,6 +103,8 @@ long long	ft_atoi_ps(const char *str)
 			return (nv < 0 ? 0 : -1);
 		nb = nb * 10 + (*str - 48);
 		str++;
+		if (nb > INT32_MAX)
+			exit_error();
 	}
 	nb *= nv;
 	if (nb > INT32_MAX || nb < INT32_MIN)
