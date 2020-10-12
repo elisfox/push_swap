@@ -12,6 +12,46 @@
 
 #include "push_swap.h"
 
+void		first_smallest(t_massive *s)
+{
+	if (s->a->index < s->a->next->next->index)
+	{
+		swap_a_b(s->a);
+		s->message = ft_strjoin_f(s->message, "sa\n", 1);
+		s->a = rotate_a_b(s->a);
+		s->message = ft_strjoin_f(s->message, "ra\n", 1);
+	}
+	else if (s->a->next->index > s->a->next->next->index)
+	{
+		s->a = rr_a_b(s->a);
+		s->message = ft_strjoin_f(s->message, "rra\n", 1);
+	}
+}
+
+void		first_not_smallest(t_massive *s)
+{
+	if (s->a->next->index < s->a->next->next->index)
+	{
+		if (s->a->index < s->a->next->next->index)
+		{
+			swap_a_b(s->a);
+			s->message = ft_strjoin_f(s->message, "sa\n", 1);
+		}
+		else
+		{
+			s->a = rotate_a_b(s->a);
+			s->message = ft_strjoin_f(s->message, "ra\n", 1);
+		}
+	}
+	else
+	{
+		swap_a_b(s->a);
+		s->message = ft_strjoin_f(s->message, "sa\n", 1);
+		s->a = rr_a_b(s->a);
+		s->message = ft_strjoin_f(s->message, "rra\n", 1);
+	}
+}
+
 void		print_stack(t_stack *a, t_stack *b)
 {
 	ft_printf("_   _\na   b\n");

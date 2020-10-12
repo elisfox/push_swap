@@ -96,6 +96,14 @@ void	five_sort(t_massive *s, int size_chunk)
 	push_to_b(s, size_chunk);
 }
 
+void	second_or_first(t_massive *s, int count_first, int count_second)
+{
+	if (s->b)
+		second_or_first_b_up(s, count_first, count_second);
+	else
+		second_or_first_up(s, count_first, count_second);
+}
+
 void	correct_order(t_massive *s, int size_chunk)
 {
 	int		count_first;
@@ -119,40 +127,8 @@ void	correct_order(t_massive *s, int size_chunk)
 			tmp = tmp->prev;
 			count_second++;
 		}
-		if(s->b)
-			second_or_first_b_up(s, count_first, count_second);
-		else
-			second_or_first_up(s, count_first, count_second);	
+		second_or_first(s, count_first, count_second);
 	}
 	while (s->b)
 		pa_and_print(s);
-}
-
-void	new_sort(t_massive *s, int max_i)
-{
-	int size_chunk;
-	int count;
-	int i;
-
-	i = 1;
-	size_chunk = s->size;
-	count = 0;
-	if (s->size >= 40)
-	{
-		size_chunk = s->size / max_i;
-		while (i <= max_i)
-		{
-			while (count < size_chunk)
-			{
-				five_sort(s, size_chunk);
-				count++;
-			}
-			i++;
-			if (i == max_i)
-				size_chunk = s->size;
-			if (i < max_i)
-				size_chunk += s->size / max_i;
-		}
-		correct_order(s, size_chunk);
-	}
 }

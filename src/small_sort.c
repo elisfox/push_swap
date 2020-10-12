@@ -12,55 +12,10 @@
 
 #include "push_swap.h"
 
-void	sa_and_print(t_massive *s)
-{
-	swap_a_b(s->a);
-	s->message = ft_strjoin_f(s->message, "sa\n", 1);
-}
-
-static void	first_smallest(t_massive *s)
-{
-	if (s->a->index < s->a->next->next->index)
-	{
-		swap_a_b(s->a);
-		s->message = ft_strjoin_f(s->message, "sa\n", 1);
-		s->a = rotate_a_b(s->a);
-		s->message = ft_strjoin_f(s->message, "ra\n", 1);
-	}
-	else if (s->a->next->index > s->a->next->next->index)
-	{
-		s->a = rr_a_b(s->a);
-		s->message = ft_strjoin_f(s->message, "rra\n", 1);
-	}
-}
-
-static void	first_not_smallest(t_massive *s)
-{
-	if (s->a->next->index < s->a->next->next->index)
-	{
-		if (s->a->index < s->a->next->next->index)
-		{
-			swap_a_b(s->a);
-			s->message = ft_strjoin_f(s->message, "sa\n", 1);
-		}
-		else
-		{
-			s->a = rotate_a_b(s->a);
-			s->message = ft_strjoin_f(s->message, "ra\n", 1);
-		}
-	}
-	else
-	{
-		swap_a_b(s->a);
-		s->message = ft_strjoin_f(s->message, "sa\n", 1);
-		s->a = rr_a_b(s->a);
-		s->message = ft_strjoin_f(s->message, "rra\n", 1);
-	}
-}
-
 void	three_sort(t_massive *s)
 {
-	if (s->a->index < s->a->next->index && s->a->next->index > s->a->next->next->index)
+	if (s->a->index < s->a->next->index && \
+	s->a->next->index > s->a->next->next->index)
 		first_smallest(s);
 	else if (s->a->index > s->a->next->index)
 		first_not_smallest(s);
@@ -94,12 +49,20 @@ void	smallest_way(t_massive *s, int min_max)
 	pa_and_print(s);
 }
 
+void	sort_five(t_massive *s, int min_max, int min, int max)
+{
+	if (min_max == s->size && s->b->index >= max)
+		min_max = min;
+	if (min_max)
+		smallest_way(s, min_max);
+}
+
 void	algo(t_massive *s)
 {
-	int min;
-	int max;
-	int min_max;
-	t_stack *tmp;
+	int		min;
+	int		max;
+	int		min_max;
+	t_stack	*tmp;
 
 	tmp = s->a;
 	max = 0;
@@ -116,12 +79,7 @@ void	algo(t_massive *s)
 	if (min_max != s->size && s->b->index > max)
 		pa_and_print(s);
 	else
-	{
-		if (min_max == s->size && s->b->index >= max)
-			min_max = min;
-		if (min_max)
-			smallest_way(s, min_max);
-	}
+		sort_five(s, min_max, min, max);
 }
 
 void	small_sort(t_massive *s)

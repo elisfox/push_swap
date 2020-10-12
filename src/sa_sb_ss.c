@@ -12,6 +12,12 @@
 
 #include "push_swap.h"
 
+void	sa_and_print(t_massive *s)
+{
+	swap_a_b(s->a);
+	s->message = ft_strjoin_f(s->message, "sa\n", 1);
+}
+
 void	swap_a_b(t_stack *stack)
 {
 	int	tmp;
