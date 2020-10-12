@@ -78,5 +78,6 @@ char	***extract_numbers(int ac, char **av);
 int		count_numbers(char ***args);
 void	small_sort(t_massive *s);
 void	five_sort(t_massive *s, int size_chunk);
+void	correct_order(t_massive *s, int size_chunk);
 
 #endif

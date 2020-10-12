@@ -104,7 +104,7 @@ void	correct_order(t_massive *s, int size_chunk)
 
 	count_first = 0;
 	count_second = 0;
-	tmp = s->b;
+	tmp = (s->b ? s->b : s->a);
 	if (tmp->index != size_chunk)
 	{
 		while (tmp->index != size_chunk)
@@ -119,7 +119,10 @@ void	correct_order(t_massive *s, int size_chunk)
 			tmp = tmp->prev;
 			count_second++;
 		}
-		second_or_first_b_up(s, count_first, count_second);
+		if(s->b)
+			second_or_first_b_up(s, count_first, count_second);
+		else
+			second_or_first_up(s, count_first, count_second);	
 	}
 	while (s->b)
 		pa_and_print(s);

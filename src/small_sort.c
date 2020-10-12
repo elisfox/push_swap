@@ -60,7 +60,7 @@ void	three_sort(t_massive *s)
 		first_not_smallest(s);
 }
 
-smallest_way(t_massive *s, int min_max)
+void	smallest_way(t_massive *s, int min_max)
 {
 	t_stack *tmp;
 	int		count_first;
@@ -68,7 +68,7 @@ smallest_way(t_massive *s, int min_max)
 
 	count_first = 0;
 	count_second = 0;
-	tmp = s->b;
+	tmp = s->a;
 	while (tmp->index != min_max)
 	{
 		tmp = tmp->next;
@@ -99,34 +99,68 @@ void	algo(t_massive *s)
 	max = 0;
 	min = s->size;
 	min_max = s->size;
-
-	min = ((tmp->index < min) ? tmp->index : min);
-	max = ((tmp->index > max) ? tmp->index : max);
-	min_max = ((tmp->index < min_max && s->b->index < tmp->index) ? \
+	while (tmp)
+	{
+		min = ((tmp->index < min) ? tmp->index : min);
+		max = ((tmp->index > max) ? tmp->index : max);
+		min_max = ((tmp->index < min_max && s->b->index < tmp->index) ? \
 		tmp->index : min_max);
-	if (s->size == 3)
-		three_sort(s);
-	if (s->b->index < min)
-		min_max = min;
-	if (min_max != s->size)
+		tmp = tmp->next;
+		//printf("min_max = %d\n", min_max);
+		//printf("max = %d\n", max);
+	}
+
+	//printf("min_max = %d\n", min_max);
+	if (min_max != s->size && s->b->index > max) //|| min_max == s->size)
+		pa_and_print(s);
+	else
+	{
+	
+		if (min_max == s->size && s->b->index >= max)
+			min_max = min;
+	
+	
+		if (min_max) //!= s->b->index) //!= s->size)
+			smallest_way(s, min_max);
+	}
+	
+	/*else if (min_max == s->size)
+	{
+		min_max = 1;
 		smallest_way(s, min_max);
+	}*/
+}
 
 void	small_sort(t_massive *s)
 {
+	int count;
+
+	count = 0;
+	if (s->size < 3)
+	{
+		if (s->a->index != 1)
+		{
+			swap_a_b(s->a);
+			s->message = ft_strjoin_f(s->message, "sa\n", 1);
+		}
+	}
+	else
+	{
 		while (count < s->size - 3)
 		{
 			pb_and_print(s);
 			count++;
 		}
 		three_sort(s);
+		//print_stack(s->a, s->b);
 		count = 0;
 		while (count < s->size - 3)
 		{
 			algo(s);
 			count++;
+			//print_stack(s->a, s->b);
 		}
-	
+		correct_order(s, 1);
+	}
+	//print_stack(s->a, s->b);
 }
-/*printf("s->a->index = %d", s->a->index);
-			printf("s->a->next->index = %d", s->a->next->index);
-			printf("s->a->next->next->index = %d", s->a->next->next->index);*/ //if (s->a->next->index < s->a->next->next->index)
