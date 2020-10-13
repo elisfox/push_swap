@@ -12,6 +12,12 @@
 
 #include "push_swap.h"
 
+static void	clean(t_stack *a, t_stack *b)
+{
+	delete_stack(a);
+	delete_stack(b);
+}
+
 int	main(int ac, char **av)
 {
 	t_massive *s;
@@ -23,6 +29,7 @@ int	main(int ac, char **av)
 		init_stack_a(s, av, ac);
 		s->b = NULL;
 		read_instructions(s);
+		clean(s->a, s->b);
 	}
 	free(s);
 	return (0);

@@ -12,6 +12,28 @@
 
 #include "push_swap.h"
 
+
+static void			free_arr(char ***str)
+{
+	int	i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while(str[j] != NULL)
+	{
+		i = 0;
+		while (str[j][i] != NULL)
+			i++;
+		while (--i != -1)
+			free(str[j][i]);
+		j++;
+	}
+	while (--j != -1)
+		free(str[j]);
+	free(str);
+}
+
 void	valid_args(t_massive *s, int ac, char **av)
 {
 	char ***args;
@@ -21,6 +43,8 @@ void	valid_args(t_massive *s, int ac, char **av)
 	s->size = count_numbers(args);
 	s->tab = create_array(s->size, args);
 	check_doubles(s->tab, s->size);
+	free_arr(args);
+
 }
 
 t_stack	*add_elem(t_stack *first, int i)
@@ -69,4 +93,5 @@ void	init_stack_a(t_massive *s, char **av, int ac)
 	new_tab = sort_tab(s->tab, s->size);
 	s->a = head;
 	get_index(s->a, new_tab);
+	free(new_tab);
 }

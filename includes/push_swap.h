@@ -82,5 +82,6 @@ void	correct_order(t_massive *s, int size_chunk);
 void	sa_and_print(t_massive *s);
 void	first_smallest(t_massive *s);
 void	first_not_smallest(t_massive *s);
+void	delete_stack(t_stack *stack);
 
 #endif

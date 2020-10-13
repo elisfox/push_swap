@@ -36,7 +36,8 @@ SRCS_NAME = pa_pb.c \
 			push_for_sort.c \
 			push_for_sort2.c \
 			valid.c \
-			small_sort.c
+			small_sort.c \
+			delete_stack.c
 
 SRCS_CHECKER = checker.c $(SRCS_NAME)
 
