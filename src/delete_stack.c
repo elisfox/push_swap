@@ -21,7 +21,7 @@ void		delete_stack(t_stack *stack)
 		return ;
 	while (stack)
 	{
-		stack->prev->next = NULL;
+		//stack->prev->next = NULL;
 		stack = delete_one(stack);
 	}
 	free(stack);

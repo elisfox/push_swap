@@ -44,7 +44,6 @@ void	valid_args(t_massive *s, int ac, char **av)
 	s->tab = create_array(s->size, args);
 	check_doubles(s->tab, s->size);
 	free_arr(args);
-
 }
 
 t_stack	*add_elem(t_stack *first, int i)
@@ -94,4 +93,5 @@ void	init_stack_a(t_massive *s, char **av, int ac)
 	s->a = head;
 	get_index(s->a, new_tab);
 	free(new_tab);
+	free(s->tab);
 }
