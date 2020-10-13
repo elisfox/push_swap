@@ -30,10 +30,10 @@ t_stack	*rotate_a_b(t_stack *stack)
 	return (head);
 }
 
-void	rr(t_stack *stack_a, t_stack *stack_b)
+void	rr(t_massive *s)
 {
-	rotate_a_b(stack_a);
-	rotate_a_b(stack_b);
+	s->a = rotate_a_b(s->a);
+	s->b = rotate_a_b(s->b);
 }
 
 t_stack	*rr_a_b(t_stack *stack)
@@ -60,8 +60,8 @@ t_stack	*rr_a_b(t_stack *stack)
 	return (last);
 }
 
-void	rrr(t_stack *stack_a, t_stack *stack_b)
+void	rrr(t_massive *s)
 {
-	rr_a_b(stack_a);
-	rr_a_b(stack_b);
+	s->a = rr_a_b(s->a);
+	s->b = rr_a_b(s->b);
 }

@@ -29,13 +29,13 @@ void		make_instr(t_massive *s, t_instr *instr)
 	else if (instr->comm == RB)
 		s->b = rotate_a_b(s->b);
 	else if (instr->comm == RR)
-		rr(s->a, s->b);
+		rr(s);
 	else if (instr->comm == RRA)
 		s->a = rr_a_b(s->a);
 	else if (instr->comm == RRB)
 		s->b = rr_a_b(s->b);
 	else if (instr->comm == RRR)
-		rrr(s->a, s->b);
+		rrr(s);
 }
 
 static int	check_instr(char *line, t_instr *instr)
@@ -69,18 +69,22 @@ static int	check_instr(char *line, t_instr *instr)
 
 void		check_sort_stacks(t_massive *s)
 {
-	int flag_a;
-	int flag_b;
+	int		flag_a;
+	int		flag_b;
+	t_stack	*tmp;
+	t_stack	*tmp2;
 
 	flag_a = 1;
 	flag_b = 1;
-	while (s->a->next)
+	tmp = s->a;
+	tmp2 = s->b;
+	while (tmp->next)
 	{
-		if (s->a->val > s->a->next->val)
+		if (tmp->val > tmp->next->val)
 			flag_a = 0;
-		s->a = s->a->next;
+		tmp = tmp->next;
 	}
-	if (s->b)
+	if (tmp2)
 		flag_b = 0;
 	if (flag_a == 0 || flag_b == 0)
 		ft_printf("KO\n");

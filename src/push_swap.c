@@ -88,7 +88,7 @@ int				main(int ac, char **av)
 			ft_printf("%s", s->message);
 			free(s->message);
 		}
-		//delete_stack(s->a);
+		delete_stack(s->a);
 	}
 	free(s);
 }
