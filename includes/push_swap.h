@@ -59,7 +59,7 @@ t_stack				*rr_a_b(t_stack *stack);
 void				rrr(t_massive *s);
 void				print_stack(t_stack *a, t_stack *b);
 void				read_instructions(t_massive *s);
-long long			ft_atoi_ps(const char *str);
+long long			ft_atoi_ps(const char *str, int nv);
 void				new_sort(t_massive *s, int max_i);
 void				pb_and_print(t_massive *s);
 void				pa_and_print(t_massive *s);

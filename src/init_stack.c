@@ -12,15 +12,14 @@
 
 #include "push_swap.h"
 
-
-static void			free_arr(char ***str)
+static void	free_arr(char ***str)
 {
 	int	i;
 	int j;
 
 	i = 0;
 	j = 0;
-	while(str[j] != NULL)
+	while (str[j] != NULL)
 	{
 		i = 0;
 		while (str[j][i] != NULL)
@@ -34,7 +33,7 @@ static void			free_arr(char ***str)
 	free(str);
 }
 
-void	valid_args(t_massive *s, int ac, char **av)
+void		valid_args(t_massive *s, int ac, char **av)
 {
 	char ***args;
 
@@ -46,7 +45,7 @@ void	valid_args(t_massive *s, int ac, char **av)
 	free_arr(args);
 }
 
-t_stack	*add_elem(t_stack *first, int i)
+t_stack		*add_elem(t_stack *first, int i)
 {
 	t_stack *new;
 
@@ -58,7 +57,7 @@ t_stack	*add_elem(t_stack *first, int i)
 	return (new);
 }
 
-void	get_index(t_stack *a, int *new_tab)
+void		get_index(t_stack *a, int *new_tab)
 {
 	int j;
 
@@ -73,7 +72,7 @@ void	get_index(t_stack *a, int *new_tab)
 	}
 }
 
-void	init_stack_a(t_massive *s, char **av, int ac)
+void		init_stack_a(t_massive *s, char **av, int ac)
 {
 	t_stack	*head;
 	int		i;

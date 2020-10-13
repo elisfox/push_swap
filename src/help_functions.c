@@ -82,13 +82,11 @@ void		exit_error(void)
 	exit(1);
 }
 
-long long	ft_atoi_ps(const char *str)
+long long	ft_atoi_ps(const char *str, int nv)
 {
-	int			nv;
 	long long	nb;
 
 	nb = 0;
-	nv = 1;
 	while (ft_isspace(*str))
 		str++;
 	if (*str == '-' || *str == '+')
