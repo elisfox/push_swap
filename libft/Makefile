@@ -27,7 +27,6 @@ SOURCES_LIST = ft_strjoin_f.c\
 		ft_ftoa_long.c\
 		ft_itoa_long.c\
 		ft_itoa_longlong.c\
-		ft_swap.c\
 		ft_getnbr.c\
 		ft_free_array.c\
 		ft_lstiter.c\

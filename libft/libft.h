@@ -30,7 +30,6 @@ char				*ft_ftoa(double nbr, unsigned int precision);
 char				*ft_ftoa_long(long double nbr, unsigned int precision);
 char				*ft_itoa_long(long nbr);
 char				*ft_itoa_longlong(long long nbr);
-void				ft_swap(char *c1, char *c2);
 char				*ft_itoa_unsigned(size_t n);
 int					ft_getnbr(char *s);
 int					get_next_line(const int fd, char **line);
